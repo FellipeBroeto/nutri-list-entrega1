@@ -1,0 +1,29 @@
+<!-- userlogin-create.html -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Create UserLogin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-button (click)="cadastro()">Cadastro</ion-button>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label>e-mail</ion-label>
+    <ion-input [(ngModel)]="data.email" placeholder="Enter e-mail"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Password</ion-label>
+    <ion-input [(ngModel)]="data.password" placeholder=""></ion-input>
+  </ion-item> 
+
+  <ion-item>
+    <ion-button (click)="login()">Login</ion-button>
+  </ion-item>
+
+</ion-content>

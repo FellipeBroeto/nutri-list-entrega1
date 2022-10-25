@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Listar Alimentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id&nbsp;</th>
+        <th scope="col">Nome&nbsp;</th>
+        <th scope="col">Calorias&nbsp;</th>
+        <th scope="col">Peso&nbsp;</th>
+        <th scope="col">Porção&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of alimentosData">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.calorias }}</td>
+        <td>{{ item.peso }}</td>
+        <td>{{ item.porcao }}</td>
+        <td style="display: flex">
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <ion-item>
+
+  <ion-button [routerLink]="['/dieta-listar']">
+    Listar Dieta
+  </ion-button>
+  
+  <ion-button [routerLink]="['/alimento-criar']">
+    Adicionar Alimento
+  </ion-button>
+
+  </ion-item>
+
+  
+
+</ion-content>

@@ -1,0 +1,42 @@
+<!-- userlogincreate-create.html -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Create UserLoginCreate</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label>name</ion-label>
+    <ion-input [(ngModel)]="data.name" placeholder="Enter Nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>e-mail</ion-label>
+    <ion-input [(ngModel)]="data.email" placeholder="Enter calorias"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Password</ion-label>
+    <ion-input [(ngModel)]="data.password" placeholder=""> </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Password Confirmation</ion-label>
+    <ion-input [(ngModel)]="data.password_confirmation" placeholder=""></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-button (click)="register()">Registrar
+    </ion-button>
+ 
+    &nbsp;
+  <ion-button [routerLink]="['/login-usuario']">
+      Logar
+  </ion-button>
+
+</ion-item>
+  
+
+</ion-content>
