@@ -39,8 +39,12 @@
 
     <ion-item>
       <ion-label>nascimento</ion-label>
-      <ion-input type="perm_contact_calendar" formControlName="nascimento" placeholder="2022-01-01"></ion-input>
+      <ion-datetime presentation="nascimento" displayFormat="YYYY-MM-DD" formControlName="nascimento" >
+      </ion-datetime><!--placeholder="2022-01-01"-->
+
     </ion-item>
+    
+
     <div *ngIf="formFinalizarCadastro.controls.nascimento.errors" class="px-3 text-danger">
       <p style="color:red" ><small>Campo obrigatório</small></p>
     </div>

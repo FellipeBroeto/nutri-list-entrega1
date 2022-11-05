@@ -86,8 +86,8 @@ export class FinalizarCadastroPage implements OnInit {
     this.dataPaciente.altura=this.formFinalizarCadastro.controls.altura.value;
     this.dataPaciente.peso=this.formFinalizarCadastro.controls.peso.value;
     this.dataPaciente.sexo=this.formFinalizarCadastro.controls.sexo.value;
-    this.dataPaciente.nascimento=this.formFinalizarCadastro.controls.nascimento.value; 
-    
+    this.dataPaciente.nascimento=this.formFinalizarCadastro.controls.nascimento.value.substring(0,10);
+        
     this.apiServicePaciente.createItem(this.dataPaciente).subscribe((response) => {
         this.errMsg = "";
         this.showErrMsg = false;

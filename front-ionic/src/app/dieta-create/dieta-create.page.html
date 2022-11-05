@@ -17,17 +17,27 @@
       <p style="color:red"><small>Campo obrigatório</small></p>
     </div>
 
-    <ion-item>
+    <ion-list>
       <ion-label>periodo</ion-label>
-      <ion-input formControlName="periodo" placeholder="Manha"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-select  formControlName="periodo" placeholder="Selecione">
+          <ion-select-option value="">Selecione</ion-select-option>
+          <ion-select-option value="manha">Manha</ion-select-option>
+          <ion-select-option value="tarde">Tarde</ion-select-option>
+          <ion-select-option value="noite">Noite</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list> 
+    
+
     <div *ngIf="formDieta.controls.periodo.errors" class="px-3 text-danger">
       <p style="color:red"><small>Campo obrigatório</small></p>
     </div>
 
     <ion-item>
       <ion-label>data</ion-label>
-      <ion-input formControlName="data" placeholder="2022-01-01"></ion-input>
+      <ion-datetime presentation="date" displayFormat="YYYY-MM-DD" formControlName="data" >
+        </ion-datetime><!--placeholder="2022-01-01"-->
     </ion-item>
     <div *ngIf="formDieta.controls.data.errors" class="px-3 text-danger">
       <p style="color:red"><small>Campo obrigatório</small></p>
@@ -35,7 +45,9 @@
 
     <ion-item>
       <ion-label>hora</ion-label>
-      <ion-input formControlName="hora" placeholder="2022-01-01 08:00"></ion-input>
+      <ion-datetime presentation="date-time" displayFormat="YYYY-MM-DD HH:mm" formControlName="hora" >
+        <span slot="time-label">Hora</span>
+      </ion-datetime><!--placeholder="2022-01-01 08:00"-->
     </ion-item>
     <div *ngIf="formDieta.controls.hora.errors" class="px-3 text-danger">
       <p style="color:red"><small>Campo obrigatório</small></p>
