@@ -1,6 +1,6 @@
+import { ApiAlimentosService } from './../../services/api-alimentos.service';
 import { Component, OnInit } from '@angular/core';
 import { Alimento } from '../models/alimento';
-import { ApiAlimentosService } from '../services/api-alimentos.service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -13,6 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./user-login/user-login.module').then( m => m.UserLoginPageModule)
   },
 
+  /*CRIAR USUARIO */
   
   { path: 'criar-usuario',
     redirectTo: 'criar-usuario', 
@@ -21,8 +22,19 @@ const routes: Routes = [
   {
     path: 'criar-usuario',
     loadChildren: () => import('./user-create/user-create.module').then( m => m.UserLoginCreatePageModule)
-  },
-
+  }, 
+ 
+ 
+    /*FINALIZAR-CADASTRO*/
+    { path: 'finalizar-cadastro',
+    redirectTo: 'finalizar-cadastro-usuario'
+    },
+    {
+      path: 'finalizar-cadastro-usuario',
+      loadChildren: () => import('./finalizar-cadastro/finalizar-cadastro.module').then( m => m.FinalizarCadastroPageModule),
+      pathMatch: 'full' 
+    },
+  
   
   /*ALIMENTOS*/
    
@@ -47,6 +59,7 @@ const routes: Routes = [
     loadChildren: () => import('./alimento-create/alimento-create.module').then( m => m.AlimentoCreatePageModule)
   },
 
+  
 
  
   /*DIETA*/
@@ -56,7 +69,16 @@ const routes: Routes = [
   }, 
   {
     path: 'dieta-listar',
-    loadChildren: () => import('./listar-dieta/listar-dieta.module').then( m => m.ListarDietaPageModule)
+    loadChildren: () => import('./dieta-list/dieta-list.module').then( m => m.DietaListPageModule)
+  },
+
+  
+  { path: 'dieta-criar',
+    redirectTo: 'dieta-criar',     
+  },
+  {
+    path: 'dieta-criar',
+    loadChildren: () => import('./dieta-create/dieta-create.module').then( m => m.DietaCreatePageModule)
   },
 
 

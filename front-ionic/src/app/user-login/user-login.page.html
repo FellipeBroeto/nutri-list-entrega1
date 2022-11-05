@@ -1,29 +1,45 @@
 <!-- userlogin-create.html -->
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>Create UserLogin</ion-title>
+    <ion-title>Login de usuarios </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+ 
+<!--[formGroup]="formLogin"-->
+  <form  [formGroup]="formLogin">
 
-  <ion-item>
-    <ion-button (click)="cadastro()">Cadastro</ion-button>
-  </ion-item>
 
+    <ion-item>
+      <ion-label>E-mail</ion-label>
+      <ion-input type="text" placeholder="Digite seu email"  formControlName="email"></ion-input>
+      
+     </ion-item>
+      
+     <div *ngIf="formLogin.controls.email.errors" class="px-3 text-danger">
+        <p style="color:red" ><small>Campo obrigatório</small></p>
+    </div>
 
-  <ion-item>
-    <ion-label>e-mail</ion-label>
-    <ion-input [(ngModel)]="data.email" placeholder="Enter e-mail"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Senha</ion-label>
+      <ion-input type="password" placeholder="Digite sua senha"  ></ion-input>
+    </ion-item> 
+    <div *ngIf="formLogin.controls.password.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
 
-  <ion-item>
-    <ion-label>Password</ion-label>
-    <ion-input [(ngModel)]="data.password" placeholder=""></ion-input>
-  </ion-item> 
+    <div *ngIf="showErrMsg" class="px-3 text-danger">
+      <p style="color:red"><small>{{errMsg}}</small></p>
+    </div>
+    
+    
 
-  <ion-item>
-    <ion-button (click)="login()">Login</ion-button>
-  </ion-item>
+    <ion-item>
+      <ion-button color="tertiary" (click)="cadastro()" style="cursor: pointer;">Cadastro</ion-button>
+      &nbsp;
+      <ion-button color="tertiary" (click)="login()" style="cursor: pointer;">Login</ion-button>
+    </ion-item>
 
+  </form>
 </ion-content>

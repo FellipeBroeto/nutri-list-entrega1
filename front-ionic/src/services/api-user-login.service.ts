@@ -1,10 +1,9 @@
-//api.service.ts
+import { UserLoginCreate } from './../app/models/user-login-create';
+import { UserLogin } from './../app/models/user-login';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { UserLogin } from '../models/user-login';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { UserLoginCreate } from '../models/user-login-create';
 
 @Injectable({
   providedIn: 'root'
@@ -32,19 +31,19 @@ export class ApiUserLoginsService {
 
   // Handle API errors
   handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
+    /*if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
+      console.log(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
+        `body was: ${JSON.stringify(error.error)}`);
+    }*/
     // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
+    //return throwError('Something bad happened; please try again later.');
+    return throwError({"status":error.status , "msg": error.error });
   };
 
 
@@ -109,7 +108,6 @@ export class ApiUserLoginsService {
 
   // Get single userlogin data by ID
   getItem(id): Observable<UserLogin> {
-    debugger
     return this.http
       .get<UserLogin>(this.base_path + '/' + id, this.getHttpOptions())
       .pipe(
@@ -118,31 +116,8 @@ export class ApiUserLoginsService {
       )
   }
 
-  // Get userlogins data
-  getList(): Observable<UserLogin> {
-  
-    
-    /*return this.http
-      .get<UserLogin>(this.base_path)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )*/
-      
-      //`${environment.apiUrl}/api/Servers/GetServerList`
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        //'Authorization': `Bearer ${this.auth_token}`
-      })
-      
-      var reqHeader = new HttpHeaders({ 
-        'Content-Type': 'application/json',
-        //'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('mpManagerToken'))
-     });
-    //return this.http.get<Server[]>(`${environment.apiUrl}/api/Servers/GetServerList`, { headers: reqHeader });
-
-    //return this.http.get<Observable>(this.base_path, { headers: headers });
-    return this.http
+  getList(): Observable<UserLogin> { 
+       return this.http
       .get<UserLogin>(this.base_path, this.getHttpOptions())
       .pipe(
         retry(2),
@@ -151,7 +126,6 @@ export class ApiUserLoginsService {
 
   }
 
-  // Update item by id
   updateItem(id, item): Observable<UserLogin> {
     return this.http
       .put<UserLogin>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())

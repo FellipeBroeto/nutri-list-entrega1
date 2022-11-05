@@ -26,17 +26,17 @@
     <ion-label>Porcao</ion-label>
     <ion-input [(ngModel)]="data.porcao" placeholder="porção"></ion-input>
   </ion-item>
+ 
 
   
   <ion-item>
-    <ion-button (click)="submitForm()">Adicionar
+    <ion-button color="tertiary" [routerLink]="['/alimento-listar']">
+      Voltar
+    </ion-button>
+    &nbsp;
+    <ion-button color="tertiary" (click)="submitForm()">
+      Adicionar
     </ion-button>
   </ion-item>
-
-  <br/>
-    
-  <ion-button [routerLink]="['/alimento-listar']">
-    voltar
-  </ion-button>
 
 </ion-content>

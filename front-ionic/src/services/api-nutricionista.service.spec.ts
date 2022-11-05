@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApiDietasService } from './api-dieta.service';
+import { ApiNutricionistaService } from './api-nutricionista.service';
 
 describe('ApiService', () => {
-  let service: ApiDietasService;
+  let service: ApiNutricionistaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ApiDietasService);
+    service = TestBed.inject(ApiNutricionistaService);
   });
 
   it('should be created', () => {

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListarDietaPageRoutingModule } from './listar-dieta-routing.module';
+import { AlimentoDetailPageRoutingModule } from './alimento-detail-routing.module';
 
-import { ListarDietaPage } from './listar-dieta.page';
+import { AlimentoDetailPage } from './alimento-detail.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListarDietaPageRoutingModule
+    AlimentoDetailPageRoutingModule
   ],
-  declarations: [ListarDietaPage]
+  declarations: [AlimentoDetailPage]
 })
-export class ListarDietaPageModule {}
+export class AlimentoDetailPageModule {}

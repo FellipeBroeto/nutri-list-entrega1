@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar  color="tertiary">
+    <ion-title>Listar-Dieta</ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+
+
+<ion-content>
+
+  <div>
+    <b>Selecione Tipo Usuario</b>
+    <ion-list>
+      <ion-radio-group value="tipo_user">
+        <ion-item>
+          <ion-label>Paciente</ion-label>
+          <ion-radio slot="end" value="Paciente"  (click)="open('paciente')" checked></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Nutricionista</ion-label>
+          <ion-radio slot="end" value="nutricionista" (click)="open('nutri')" ></ion-radio>
+        </ion-item>
+     
+      </ion-radio-group>
+    </ion-list>
+
+  </div>
+
+
+  <div id="paciente" [hidden]="showPac">
+    <p><b>Paciente</b></p>
+  
+    <ion-item style="display: none;">
+      <ion-label>user_id</ion-label>
+      <ion-input [(ngModel)]="dataPaciente.user_id" placeholder="user_id"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>nascimento</ion-label>
+      <ion-input [(ngModel)]="dataPaciente.nascimento" placeholder="2022-01-01"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>peso</ion-label>
+      <ion-input [(ngModel)]="dataPaciente.peso" placeholder="1"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>altura</ion-label>
+      <ion-input [(ngModel)]="dataPaciente.altura" placeholder="1"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>sexo</ion-label>
+      <ion-input [(ngModel)]="dataPaciente.sexo" placeholder="M"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-button (click)="finalizarPaciente()">Finalizar</ion-button>
+    </ion-item>
+
+    
+  </div>
+
+  
+  
+  <div id="nutricionista" [hidden]="!showPac">
+    <p><b>Nutricionista</b></p>
+
+    <ion-item style="display: none;">
+      <ion-label>user_id</ion-label>
+      <ion-input [(ngModel)]="dataNutri.user_id" placeholder="user_id"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>crm</ion-label>
+      <ion-input [(ngModel)]="dataNutri.crn" placeholder=""></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-button (click)="finalizarNutri()">Finalizar</ion-button>
+    </ion-item>
+
+  </div>
+ 
+
+</ion-content>

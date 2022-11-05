@@ -1,6 +1,6 @@
 //alimento-list.page.ts
 import { Component, OnInit } from '@angular/core';
-import { ApiAlimentosService } from '../services/api-alimentos.service';
+import { ApiAlimentosService } from './../../services/api-alimentos.service';
 
 @Component({
   selector: 'app-alimento-list',
@@ -29,7 +29,7 @@ export class AlimentoListPage implements OnInit {
     
     this.apiService.getList().subscribe(response => {
 
-      debugger;
+      
       
       console.log(response);
       this.alimentosData = response['alimentos'];
@@ -37,7 +37,7 @@ export class AlimentoListPage implements OnInit {
   }
 
 
-  delete(item) {
+  delete(item: { id: any; }) {
     
     this.apiService.deleteItem(item.id).subscribe(Response => {
       this.getAllAlimentos();

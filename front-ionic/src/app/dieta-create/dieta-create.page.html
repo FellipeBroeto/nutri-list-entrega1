@@ -1,0 +1,39 @@
+<!--dieta-create.html -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>CreateDieta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label>nome</ion-label>
+    <ion-input [(ngModel)]="data.nome" placeholder="Nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>periodo</ion-label>
+    <ion-input [(ngModel)]="data.periodo" placeholder="Manha"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>data</ion-label>
+    <ion-input [(ngModel)]="data.data" placeholder="2022-01-01"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>hora</ion-label>
+    <ion-input [(ngModel)]="data.hora" placeholder="2022-01-01 08:00"></ion-input>
+  </ion-item>
+ 
+
+  <ion-item>
+    <ion-button (click)="voltar()">Voltar
+    </ion-button>
+    &nbsp;
+    <ion-button (click)="submitForm()">Add
+    </ion-button>
+  </ion-item>
+
+</ion-content>
