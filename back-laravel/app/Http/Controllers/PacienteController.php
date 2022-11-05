@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DietaUser;
+use App\Models\Paciente;
 use Illuminate\Support\Facades\Validator;
 
 
-class DietaUserController extends Controller
+class PacienteController extends Controller
 {
 
     function listar(Request $request){
 
-        $dietauser = DietaUser::all();
+        $paciente = Paciente::all();
 
         return  response()->json(array(
-            'dietausers'=> $dietauser
+            'pacientes'=> $paciente
         ), 200);
 
     }
@@ -26,9 +26,11 @@ class DietaUserController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
-
+            'user_id' => 'required|string|max:255',
+            'nascimento' => 'required|string|max:255',
+            /*'peso' => 'required|float',
+            'altura' => 'required|float',*/
+            'sexo' => 'required|string|max:255'
         ]);
 
 
@@ -40,10 +42,13 @@ class DietaUserController extends Controller
             ], 400);
         }
 
-        $dietauser=new DietaUser;
-        $dietauser->dieta_id=$request->nome;
-        $dietauser->user_id=$request->user_id;
-        $result=$dietauser->Save();
+        $paciente=new Paciente;
+        $paciente->user_id=$request->user_id;
+        $paciente->nascimento=$request->nascimento;
+        $paciente->peso=$request->peso;
+        $paciente->altura=$request->altura;
+        $paciente->sexo=$request->sexo;
+        $result= $paciente->Save();
 
         if($result){
             return  response()->json(array(
@@ -65,13 +70,12 @@ class DietaUserController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
-
+            'user_id' => 'required|string|max:255',
+            'nascimento' => 'required|string|max:255',
+            'peso' => 'required|float',
+            'altura' => 'required|float',
+            'sexo' => 'required|string|max:255'
         ]);
-
-
-
 
         if ($validator->fails()) {
             $errors = $validator->errors();
@@ -82,10 +86,13 @@ class DietaUserController extends Controller
         }
 
 
-        $dietauser=DietaUser::find($request->id);
-        $dietauser->dieta_id=$request->dieta_id;
-        $dietauser->user_id =$request->user_id;
-        $result=$dietauser->save();
+        $paciente=new Paciente;
+        $paciente->user_id=$request->user_id;
+        $paciente->nascimento=$request->nascimento;
+        $paciente->peso=$request->peso;
+        $paciente->altura=$request->altura;
+        $paciente->sexo=$request->sexo;
+        $result= $paciente->Save();
 
         if($result){
             return  response()->json(array(

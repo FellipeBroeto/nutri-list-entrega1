@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DietaUser;
+use App\Models\Nutricionista;
 use Illuminate\Support\Facades\Validator;
 
 
-class DietaUserController extends Controller
+class NutricionistaController extends Controller
 {
+
+
 
     function listar(Request $request){
 
-        $dietauser = DietaUser::all();
+        $nutricionista = Nutricionista::all();
 
         return  response()->json(array(
-            'dietausers'=> $dietauser
+            'nutricionistas'=> $nutricionista
         ), 200);
 
     }
@@ -26,8 +28,7 @@ class DietaUserController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
+            'crn' => 'required|numeric',
 
         ]);
 
@@ -40,10 +41,10 @@ class DietaUserController extends Controller
             ], 400);
         }
 
-        $dietauser=new DietaUser;
-        $dietauser->dieta_id=$request->nome;
-        $dietauser->user_id=$request->user_id;
-        $result=$dietauser->Save();
+        $nutricionista=new Nutricionista;
+        $nutricionista->crn=$request->crn;
+        $nutricionista->user_id=$request->user_id;
+        $result=$nutricionista->Save();
 
         if($result){
             return  response()->json(array(
@@ -63,15 +64,10 @@ class DietaUserController extends Controller
 
     function alterar(Request $request){
 
-
         $validator = Validator::make($request->all(), [
-            'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
+            'crn' => 'required|numeric',
 
         ]);
-
-
-
 
         if ($validator->fails()) {
             $errors = $validator->errors();
@@ -82,10 +78,10 @@ class DietaUserController extends Controller
         }
 
 
-        $dietauser=DietaUser::find($request->id);
-        $dietauser->dieta_id=$request->dieta_id;
-        $dietauser->user_id =$request->user_id;
-        $result=$dietauser->save();
+        $nutricionista=new Nutricionista;
+        $nutricionista->crn=$request->crn;
+        $nutricionista->user_id=$request->user_id;
+        $result=$nutricionista->Save();;
 
         if($result){
             return  response()->json(array(

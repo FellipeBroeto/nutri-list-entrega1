@@ -12,6 +12,18 @@ class DietaController extends Controller
 
 
 
+
+    function listarById(Request $request){
+
+        $dieta = Dieta::all();
+
+        return  response()->json(array(
+            'dietas'=> $dieta
+        ), 200);
+
+    }
+
+
     function listar(Request $request){
 
         $dieta = Dieta::all();

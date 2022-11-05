@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DietaUser;
+use App\Models\DietaAlimento;
 use Illuminate\Support\Facades\Validator;
 
 
-class DietaUserController extends Controller
+class DietaAlimentoController extends Controller
 {
 
     function listar(Request $request){
 
-        $dietauser = DietaUser::all();
+        $dietaalimento = DietaAlimento::all();
 
         return  response()->json(array(
-            'dietausers'=> $dietauser
+            'dietaalimentos'=> $dietaalimento
         ), 200);
 
     }
@@ -27,7 +27,7 @@ class DietaUserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
+            'alimento_id' => 'required|numeric',
 
         ]);
 
@@ -40,10 +40,10 @@ class DietaUserController extends Controller
             ], 400);
         }
 
-        $dietauser=new DietaUser;
-        $dietauser->dieta_id=$request->nome;
-        $dietauser->user_id=$request->user_id;
-        $result=$dietauser->Save();
+        $dietaalimento=new DietaAlimento;
+        $dietaalimento->dieta_id=$request->nome;
+        $dietaalimento->alimento_id=$request->alimento_id;
+        $result=$dietaalimento->Save();
 
         if($result){
             return  response()->json(array(
@@ -66,7 +66,7 @@ class DietaUserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
+            'alimento_id' => 'required|numeric',
 
         ]);
 
@@ -82,10 +82,10 @@ class DietaUserController extends Controller
         }
 
 
-        $dietauser=DietaUser::find($request->id);
-        $dietauser->dieta_id=$request->dieta_id;
-        $dietauser->user_id =$request->user_id;
-        $result=$dietauser->save();
+        $dietaalimento=DietaAlimento::find($request->id);
+        $dietaalimento->dieta_id=$request->dieta_id;
+        $dietaalimento->alimento_id =$request->alimento_id;
+        $result=$dietaalimento->save();
 
         if($result){
             return  response()->json(array(

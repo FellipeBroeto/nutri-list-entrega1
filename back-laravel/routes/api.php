@@ -3,7 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlimentoController;
+use App\Http\Controllers\NutricionistaController;
+use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\DietaController;
+use App\Http\Controllers\DietaAlimentoController;
+use App\Http\Controllers\PacienteNutricionistaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 /*
@@ -40,11 +44,30 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     #dietas
+    Route::get('/dietas/listar/{id}', [DietaController::class, 'listarById']);
     Route::get('/dietas/listar', [DietaController::class, 'listar']);
     Route::post('/dietas', [DietaController::class, 'adicionar']);
     Route::post('/dietas/{id}', [DietaController::class, 'alterar']);
 
+    ### Pacientes
+    Route::get('/pacientes/listar', [PacienteController::class, 'listar']);
+    Route::post('/pacientes', [PacienteController::class, 'adicionar']);
+    Route::post('/pacientes/{id}', [PacienteController::class, 'alterar']);
 
+    ### Nutricionistas
+    Route::get('/nutricionistas/listar', [NutricionistaController::class, 'listar']);
+    Route::post('/nutricionistas', [NutricionistaController::class, 'adicionar']);
+    Route::post('/nutricionistas/{id}', [NutricionistaController::class, 'alterar']);
+
+    ###   DietaAlimento
+    Route::get('/dietaAlimento/listar', [DietaAlimentoController::class, 'listar']);
+    Route::post('/dietaAlimento', [DietaAlimentoController::class, 'adicionar']);
+    Route::post('/dietaAlimento/{id}', [DietaAlimentoController::class, 'alterar']);
+
+    ###   PacienteNutricionista
+    Route::get('/PacienteNutricionista/listar', [PacienteNutricionistaController::class, 'listar']);
+    Route::post('/PacienteNutricionista', [PacienteNutricionistaController::class, 'adicionar']);
+    Route::post('/PacienteNutricionista/{id}', [PacienteNutricionistaController::class, 'alterar']);
 
 });
 

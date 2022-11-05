@@ -3,19 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DietaUser;
+use App\Models\PacienteNutricionista;
 use Illuminate\Support\Facades\Validator;
 
 
-class DietaUserController extends Controller
+class PacienteNutricionistaController extends Controller
 {
+
+    //public function index() {
+        //$alimento = Alimento::all();
+        //return view('index');
+
+        //$alimento = Alimento::orderBy('id','desc')->paginate(5);
+        //return view('index', compact('alimentos'));
+
+       // public function getAllAlimentos() {
+           // $alimentos = Alimento::get()->toJson(JSON_PRETTY_PRINT);
+           // return response($alimentos, 200);
+        //}
+
 
     function listar(Request $request){
 
-        $dietauser = DietaUser::all();
+        $pacientenutricionista = PacienteNutricionista::all();
 
         return  response()->json(array(
-            'dietausers'=> $dietauser
+            'pacientenutricionistas'=> $pacientenutricionista
         ), 200);
 
     }
@@ -26,8 +39,7 @@ class DietaUserController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
+            'crn' => 'required|numeric',
 
         ]);
 
@@ -40,10 +52,9 @@ class DietaUserController extends Controller
             ], 400);
         }
 
-        $dietauser=new DietaUser;
-        $dietauser->dieta_id=$request->nome;
-        $dietauser->user_id=$request->user_id;
-        $result=$dietauser->Save();
+        $pacientenutricionista=new PacienteNutricionista;
+        $pacientenutricionista->crn=$request->crn;
+        $result=$pacientenutricionista->Save();
 
         if($result){
             return  response()->json(array(
@@ -63,15 +74,10 @@ class DietaUserController extends Controller
 
     function alterar(Request $request){
 
-
         $validator = Validator::make($request->all(), [
-            'dieta_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
+            'crn' => 'required|numeric',
 
         ]);
-
-
-
 
         if ($validator->fails()) {
             $errors = $validator->errors();
@@ -82,10 +88,9 @@ class DietaUserController extends Controller
         }
 
 
-        $dietauser=DietaUser::find($request->id);
-        $dietauser->dieta_id=$request->dieta_id;
-        $dietauser->user_id =$request->user_id;
-        $result=$dietauser->save();
+        $pacientenutricionista=new PacienteNutricionista;
+        $pacientenutricionista->crn=$request->crn;
+        $result=$alimento->Save();;
 
         if($result){
             return  response()->json(array(
