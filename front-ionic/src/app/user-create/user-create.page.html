@@ -7,44 +7,65 @@
 
 <ion-content class="ion-padding">
 
-  <ion-item>
-    <ion-label>nome</ion-label>
-    <ion-input [(ngModel)]="data.name" placeholder="Nome"></ion-input>
-  </ion-item>
+  <form [formGroup]="formCadastro" >
 
-  <ion-item>
-    <ion-label>e-mail</ion-label>
-    <ion-input [(ngModel)]="data.email" placeholder="Email"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Senha</ion-label>
-    <ion-input [(ngModel)]="data.password" placeholder="senha"> </ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Confirmacao de senha</ion-label>
-    <ion-input [(ngModel)]="data.password_confirmation" placeholder=""></ion-input>
-  </ion-item>
-  <ion-item>
-    <div *ngIf="showErrMsg" class="px-3 text-danger">
-      <p style="color:red"><small>{{errMsg}}</small></p>
+    <ion-item>
+      <ion-label>nome</ion-label>
+      <ion-input formControlName="name" placeholder="Nome"></ion-input>
+    </ion-item>
+    <div *ngIf="formCadastro.controls.name.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
     </div>
-  </ion-item>
-
-  <ion-item>
     
-    <ion-button  color="tertiary" [routerLink]="['/login-usuario']" style="cursor: pointer;">
-      Logar
-    </ion-button>
-      &nbsp;
-    <ion-button  color="tertiary" (click)="register()" style="cursor: pointer;">
-      Registrar
-    </ion-button>
+    <ion-item>
+      <ion-label>e-mail</ion-label>
+      <ion-input formControlName="email" placeholder="Email"></ion-input>
+    </ion-item>
+    <div *ngIf="formCadastro.controls.email.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
+    
+  
+    <ion-item>
+      <ion-label>Senha</ion-label>
+      <ion-input type="password" formControlName="password"  placeholder=""> </ion-input>
+    </ion-item>
+    <div *ngIf="formCadastro.controls.password.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
+    
+
+    <ion-item>
+      <ion-label>Confirmacao de senha</ion-label>
+      <ion-input type="password" formControlName="confirm_password" placeholder=""></ion-input>
+    </ion-item>
+    <div *ngIf="formCadastro.controls.confirm_password.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
+    
+
+    <ion-item>
+      <div *ngIf="showErrMsg" class="px-3 text-danger">
+        <p style="color:red"><small>{{errMsg}}</small></p>
+      </div>
+    </ion-item>
+  
+    <ion-item>
+      
+      <ion-button  color="primary" [routerLink]="['/login-usuario']" style="cursor: pointer;">
+        Logar
+      </ion-button>
+        &nbsp;
+      <ion-button  color="tertiary" (click)="register()" style="cursor: pointer;">
+        Cadastrar
+      </ion-button>
+
+    </ion-item>
+  
+
+  </form>
     
   
 
-</ion-item>
-  
 
 </ion-content>

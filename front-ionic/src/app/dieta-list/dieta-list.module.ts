@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { DietaListPageRoutingModule } from './dieta-list-routing.module';
 
 import { DietaListPage } from './dieta-list.page';
+import {  ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DietaListPageRoutingModule
+    DietaListPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [DietaListPage]
 })

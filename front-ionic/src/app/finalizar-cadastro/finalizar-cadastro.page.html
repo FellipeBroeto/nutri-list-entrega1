@@ -26,35 +26,49 @@
     </ion-list>
 
   </div>
+  <form [formGroup]="formFinalizarCadastro">
 
-
-  <div id="paciente" [hidden]="showPac">
-    <p><b>Paciente</b></p>
-  
-    <ion-item style="display: none;">
+    <ion-item [hidden]="true">
       <ion-label>user_id</ion-label>
-      <ion-input [(ngModel)]="dataPaciente.user_id" placeholder="user_id"></ion-input>
+      <ion-input formControlName="user_id" placeholder="user_id"></ion-input>
     </ion-item>
+
+    
+  <div id="paciente" [hidden]="showPac">
+    <p><b>Paciente</b></p> 
 
     <ion-item>
       <ion-label>nascimento</ion-label>
-      <ion-input [(ngModel)]="dataPaciente.nascimento" placeholder="2022-01-01"></ion-input>
+      <ion-input type="perm_contact_calendar" formControlName="nascimento" placeholder="2022-01-01"></ion-input>
     </ion-item>
+    <div *ngIf="formFinalizarCadastro.controls.nascimento.errors" class="px-3 text-danger">
+      <p style="color:red" ><small>Campo obrigatório</small></p>
+    </div>
   
     <ion-item>
       <ion-label>peso</ion-label>
-      <ion-input [(ngModel)]="dataPaciente.peso" placeholder="1"></ion-input>
+      <ion-input formControlName="peso" placeholder="1"></ion-input>
     </ion-item>
+    <div *ngIf="formFinalizarCadastro.controls.peso.errors" class="px-3 text-danger">
+      <p style="color:red" ><small>Campo obrigatório</small></p>
+    </div>
   
     <ion-item>
       <ion-label>altura</ion-label>
-      <ion-input [(ngModel)]="dataPaciente.altura" placeholder="1"></ion-input>
+      <ion-input formControlName="altura" placeholder="1"></ion-input>
     </ion-item>
+    <div *ngIf="formFinalizarCadastro.controls.altura.errors" class="px-3 text-danger">
+      <p style="color:red" ><small>Campo obrigatório</small></p>
+    </div>
   
     <ion-item>
       <ion-label>sexo</ion-label>
-      <ion-input [(ngModel)]="dataPaciente.sexo" placeholder="M"></ion-input>
+      <ion-input formControlName="sexo" placeholder="M"></ion-input>
     </ion-item>
+        
+    <div *ngIf="formFinalizarCadastro.controls.sexo.errors" class="px-3 text-danger">
+      <p style="color:red" ><small>Campo obrigatório</small></p>
+    </div>
   
     <ion-item>
       <ion-button (click)="finalizarPaciente()">Finalizar</ion-button>
@@ -66,23 +80,30 @@
   
   
   <div id="nutricionista" [hidden]="!showPac">
-    <p><b>Nutricionista</b></p>
-
-    <ion-item style="display: none;">
-      <ion-label>user_id</ion-label>
-      <ion-input [(ngModel)]="dataNutri.user_id" placeholder="user_id"></ion-input>
-    </ion-item>
-
+    <p><b>Nutricionista</b></p> 
     <ion-item>
-      <ion-label>crm</ion-label>
-      <ion-input [(ngModel)]="dataNutri.crn" placeholder=""></ion-input>
+      <ion-label>crn</ion-label>
+      <ion-input formControlName="crn" placeholder=""></ion-input>
     </ion-item>
-  
+
+    
+    <div *ngIf="formFinalizarCadastro.controls.crn.errors" class="px-3 text-danger">
+      <p style="color:red" ><small>Campo obrigatório</small></p>
+    </div>
+
+ 
     <ion-item>
       <ion-button (click)="finalizarNutri()">Finalizar</ion-button>
     </ion-item>
 
   </div>
+
+  
+  <div *ngIf="showErrMsg" class="px-3 text-danger">
+    <p style="color:red"><small>{{errMsg}}}}</small></p>
+  </div>
+
+</form>
  
 
 </ion-content>

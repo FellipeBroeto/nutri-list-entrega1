@@ -3,6 +3,7 @@ import { UserLogin } from '../models/user-login';
 import { ApiUserLoginsService } from 'src/services/api-user-login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -15,11 +16,13 @@ export class UserLoginPage implements OnInit {
   public  data: UserLogin;
   public formLogin: FormGroup;
   public showErrMsg:boolean = false;
-  public errMsg:string = '';
+  public errMsg:string = "";
   loading:any;
+  toast :any;
 
 
   constructor(
+    private toastController: ToastController,
     private loadingCtrl: LoadingController, 
     public apiService: ApiUserLoginsService, 
     public router: Router, 
@@ -42,6 +45,11 @@ export class UserLoginPage implements OnInit {
 
 
     if(!this.formLogin.controls.email.errors){
+
+      debugger;
+      this.data.email = this.formLogin.controls.email.value;
+      this.data.password = this.formLogin.controls.password.value;
+
       this.showLoading();
       this.apiService.login(this.data).subscribe((response) => {
         debugger;
@@ -51,11 +59,16 @@ export class UserLoginPage implements OnInit {
         this.showErrMsg = false;
         this.errMsg = "";
         this.loading.dismiss();
+        this.toast.dismiss();
       
         this.router.navigate(['dieta-listar']);
       }, error => {
         this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
         this.showErrMsg = true;
+
+        //present toast
+        this.presentToast(JSON.stringify(error.msg))
+
         //esconder loading
         this.loading.dismiss();
       });
@@ -87,5 +100,18 @@ export class UserLoginPage implements OnInit {
       spinner: 'circles',
     });
     this.loading.present();
+  }
+
+  async presentToast(msg) {
+
+    /*position: 'top' | 'middle' | 'bottom' */
+    
+    this.toast = await this.toastController.create({
+      message: msg,
+      duration: 1500,
+      position: 'top'
+    });
+
+    await this.toast.present();
   }
 }
