@@ -18,6 +18,7 @@ export class UserLoginCreatePage implements OnInit {
   public errMsg:string = '';
   public formCadastro: FormGroup;
   public data: UserLoginCreate;
+  loading:any;
 
   constructor(private formBuilder: FormBuilder, private loadingCtrl: LoadingController, public apiService: ApiUserLoginsService, public router: Router) { 
     this.data = new UserLoginCreate();
@@ -31,14 +32,17 @@ export class UserLoginCreatePage implements OnInit {
       'password': ['', [Validators.required]],
       'confirm_password': [null, [Validators.required]],      
     });
-
-
+  
+    this.limparForm();
+  }
+   
+  limparForm() { 
     this.formCadastro.controls.name.setValue("");
     this.formCadastro.controls.password.setValue("");
-
+    this.data.name = "";
+    this.data.password  = "";
   }
-
-  loading:any;
+  
   async showLoading() {
      this.loading = await this.loadingCtrl.create({
       message: 'Loading...',
@@ -65,22 +69,25 @@ export class UserLoginCreatePage implements OnInit {
     
     this.showLoading();
     this.apiService.register(this.data).subscribe((response) => {
-    debugger;
-    //limpar e esconder msgs de erro
-    this.errMsg = "";
-    this.showErrMsg = false;
-
-    //esconder loading
-    this.loading.dismiss();
-
-
-    //set  localstorage vars
-    localStorage.setItem('data_token', response['access_token']);
-    localStorage.setItem('user_id', response['user'].id);     
+      debugger;
+      //limpar e esconder msgs de erro
+      this.errMsg = "";
+      this.showErrMsg = false;
       
-    //rotear
-    this.router.navigate(['dieta-listar']);
-    this.router.navigate(['finalizar-cadastro']);
+      //limpar form
+      this.limparForm();
+
+      //esconder loading
+      this.loading.dismiss();
+
+
+      //set  localstorage vars
+      localStorage.setItem('data_token', response['access_token']);
+      localStorage.setItem('user_id', response['user'].id);     
+        
+      //rotear
+      this.router.navigate(['dieta-listar']);
+      this.router.navigate(['finalizar-cadastro']);
     }, error => {
       this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
       this.showErrMsg = true;

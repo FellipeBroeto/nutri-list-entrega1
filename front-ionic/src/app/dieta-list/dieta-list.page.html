@@ -37,11 +37,16 @@
       </tr>
     </tbody>
   </table>
-  <ion-button [routerLink]="['/dieta-criar']">
-    Add Dieta
-  </ion-button>
+  
+  <ion-item>
 
-  <ion-button [routerLink]="['/alimento-listar']">
-    List Alimento
-  </ion-button>
+    <ion-button color="primary"  [routerLink]="['/dieta-criar']">
+      Adicionar Dieta
+    </ion-button>
+      &nbsp;
+    <ion-button color="tertiary" [routerLink]="['/alimento-listar']">
+      Listar Alimentos
+    </ion-button>
+
+  </ion-item>
 </ion-content>

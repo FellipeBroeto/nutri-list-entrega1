@@ -6,31 +6,43 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <ion-item>
-    <ion-label>Nome</ion-label>
-    <ion-input [(ngModel)]="data.nome" placeholder="nome"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Calorias</ion-label>
-    <ion-input [(ngModel)]="data.calorias" placeholder="calorias"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Peso</ion-label>
-    <ion-input [(ngModel)]="data.peso" placeholder="peso"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Porcao</ion-label>
-    <ion-input [(ngModel)]="data.porcao" placeholder="porção"></ion-input>
-  </ion-item>
- 
+<form [formGroup]="formAlimentos">
 
   
   <ion-item>
-    <ion-button color="tertiary" [routerLink]="['/alimento-listar']">
+    <ion-label>Nome</ion-label>
+    <ion-input formControlName="nome" placeholder="nome"></ion-input>
+  </ion-item>
+  <div *ngIf="formAlimentos.controls.nome.errors" class="px-3 text-danger">
+    <p style="color:red"><small>Campo obrigatório</small></p>
+  </div>
+
+  <ion-item>
+    <ion-label>Calorias</ion-label>
+    <ion-input formControlName="calorias" placeholder="calorias"></ion-input>
+  </ion-item>
+  <div *ngIf="formAlimentos.controls.calorias.errors" class="px-3 text-danger">
+    <p style="color:red"><small>Campo obrigatório</small></p>
+  </div>
+
+  <ion-item>
+    <ion-label>Peso</ion-label>
+    <ion-input formControlName="peso" placeholder="peso"></ion-input>
+  </ion-item>
+  <div *ngIf="formAlimentos.controls.peso.errors" class="px-3 text-danger">
+    <p style="color:red"><small>Campo obrigatório</small></p>
+  </div>
+
+  <ion-item>
+    <ion-label>Porcao</ion-label>
+    <ion-input formControlName="porcao" placeholder="porção"></ion-input>
+  </ion-item>
+  <div *ngIf="formAlimentos.controls.porcao.errors" class="px-3 text-danger">
+    <p style="color:red"><small>Campo obrigatório</small></p>
+  </div>
+  
+  <ion-item>
+    <ion-button color="primary" [routerLink]="['/alimento-listar']">
       Voltar
     </ion-button>
     &nbsp;
@@ -38,5 +50,12 @@
       Adicionar
     </ion-button>
   </ion-item>
+
+  <div *ngIf="showErrMsg" class="px-3 text-danger">
+    <p style="color:red"><small>{{errMsg}}}}</small></p>
+  </div>
+
+</form>
+
 
 </ion-content>

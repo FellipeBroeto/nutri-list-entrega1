@@ -44,9 +44,23 @@ export class FinalizarCadastroPage implements OnInit {
     let user_id = localStorage.getItem('user_id');
     this.dataPaciente.user_id = user_id;
     this.dataNutri.user_id = user_id;
-    debugger
-
+    this.limparForm();
   }
+
+  limparForm() { 
+    this.dataPaciente.altura = null;
+    this.dataPaciente.peso = null;
+    this.dataPaciente.sexo = "";
+    this.dataPaciente.nascimento = null;
+    this.dataNutri.crn = null;
+
+    this.formFinalizarCadastro.controls.crn.setValue(null);
+    this.formFinalizarCadastro.controls.altura.setValue(null);
+    this.formFinalizarCadastro.controls.peso.setValue(null);
+    this.formFinalizarCadastro.controls.sexo.setValue(null);
+    this.formFinalizarCadastro.controls.nascimento.setValue(null);
+  }
+
 
   open(tipo_usuario:string) {
     if(tipo_usuario=="paciente"){
@@ -77,6 +91,9 @@ export class FinalizarCadastroPage implements OnInit {
     this.apiServicePaciente.createItem(this.dataPaciente).subscribe((response) => {
         this.errMsg = "";
         this.showErrMsg = false;
+
+        this.limparForm();
+
         this.router.navigate(['dieta-listar']);
     }, error => {
       this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
@@ -101,6 +118,9 @@ export class FinalizarCadastroPage implements OnInit {
       this.router.navigate(['dieta-listar']);
       this.errMsg = "";
       this.showErrMsg = false;
+
+       this.limparForm();
+
     }, error => {
       this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
       this.showErrMsg = true;

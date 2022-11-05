@@ -60,11 +60,18 @@
     <div *ngIf="formFinalizarCadastro.controls.altura.errors" class="px-3 text-danger">
       <p style="color:red" ><small>Campo obrigatório</small></p>
     </div>
-  
-    <ion-item>
+     
+    <ion-list>
       <ion-label>sexo</ion-label>
-      <ion-input formControlName="sexo" placeholder="M"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-select  formControlName="sexo" placeholder="Selecione">
+          <ion-select-option value="">Selecione</ion-select-option>
+          <ion-select-option value="F">Feminino</ion-select-option>
+          <ion-select-option value="M">Masculino</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list> 
+    
         
     <div *ngIf="formFinalizarCadastro.controls.sexo.errors" class="px-3 text-danger">
       <p style="color:red" ><small>Campo obrigatório</small></p>

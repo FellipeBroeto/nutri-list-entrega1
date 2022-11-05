@@ -4,10 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserLoginPageRoutingModule } from './user-login-routing.module';
 import { UserLoginPage } from './user-login.page';
-
 import {  ReactiveFormsModule } from '@angular/forms';
-
-
 
 @NgModule({
   imports: [

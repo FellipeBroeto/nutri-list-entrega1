@@ -7,33 +7,55 @@
 
 <ion-content class="ion-padding">
 
-  <ion-item>
-    <ion-label>nome</ion-label>
-    <ion-input [(ngModel)]="data.nome" placeholder="Nome"></ion-input>
-  </ion-item>
+  <form  [formGroup]="formDieta">
 
-  <ion-item>
-    <ion-label>periodo</ion-label>
-    <ion-input [(ngModel)]="data.periodo" placeholder="Manha"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>nome</ion-label>
+      <ion-input formControlName="nome" placeholder="Nome"></ion-input>
+    </ion-item> 
+    <div *ngIf="formDieta.controls.nome.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
 
-  <ion-item>
-    <ion-label>data</ion-label>
-    <ion-input [(ngModel)]="data.data" placeholder="2022-01-01"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>periodo</ion-label>
+      <ion-input formControlName="periodo" placeholder="Manha"></ion-input>
+    </ion-item>
+    <div *ngIf="formDieta.controls.periodo.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
 
-  <ion-item>
-    <ion-label>hora</ion-label>
-    <ion-input [(ngModel)]="data.hora" placeholder="2022-01-01 08:00"></ion-input>
-  </ion-item>
- 
+    <ion-item>
+      <ion-label>data</ion-label>
+      <ion-input formControlName="data" placeholder="2022-01-01"></ion-input>
+    </ion-item>
+    <div *ngIf="formDieta.controls.data.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
 
-  <ion-item>
-    <ion-button (click)="voltar()">Voltar
-    </ion-button>
-    &nbsp;
-    <ion-button (click)="submitForm()">Add
-    </ion-button>
-  </ion-item>
+    <ion-item>
+      <ion-label>hora</ion-label>
+      <ion-input formControlName="hora" placeholder="2022-01-01 08:00"></ion-input>
+    </ion-item>
+    <div *ngIf="formDieta.controls.hora.errors" class="px-3 text-danger">
+      <p style="color:red"><small>Campo obrigatório</small></p>
+    </div>
+  
+
+    <ion-item>
+      <ion-button  color="primary"  (click)="voltar()">Voltar
+      </ion-button>
+      &nbsp;
+      <ion-button  color="tertiary" (click)="submitForm()">Add
+      </ion-button>
+    </ion-item>
+
+    <div *ngIf="showErrMsg" class="px-3 text-danger">
+      <p style="color:red"><small>{{errMsg}}}}</small></p>
+    </div>
+    
+  
+
+</form>
 
 </ion-content>

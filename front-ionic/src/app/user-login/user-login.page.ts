@@ -38,9 +38,20 @@ export class UserLoginPage implements OnInit {
       'email': [null, [Validators.required]],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(8)])]
     });
+
+    this.limparForm();
+  }
+ 
+  
+  limparForm() {
+
+    this.formLogin.controls.email.setValue("");
+    this.formLogin.controls.password.setValue("");
+    this.data.email = "";
+    this.data.password  = "";
+
   }
 
-  
   login() {
 
 
@@ -53,13 +64,16 @@ export class UserLoginPage implements OnInit {
       this.showLoading();
       this.apiService.login(this.data).subscribe((response) => {
         debugger;
+
+        this.limparForm();
+
         this.data = new UserLogin();
         localStorage.setItem('data_token', response['access_token']);
         localStorage.setItem('user_id', response['user'].id);
         this.showErrMsg = false;
         this.errMsg = "";
         this.loading.dismiss();
-        this.toast.dismiss();
+        //this.toast.dismiss();
       
         this.router.navigate(['dieta-listar']);
       }, error => {
@@ -91,8 +105,6 @@ export class UserLoginPage implements OnInit {
     });
 
   }
-
-
   
   async showLoading() {
      this.loading = await this.loadingCtrl.create({
