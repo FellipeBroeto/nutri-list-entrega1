@@ -1,14 +1,14 @@
 
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title> Detalhar Alimento</ion-title>
+    <ion-title> Detalhar Dieta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
   
-  <form  [formGroup]="formAlimento">
+  <form  [formGroup]="formDieta">
 
     <ion-item>
       <ion-label>Nome:</ion-label>
@@ -18,16 +18,16 @@
     </ion-item> 
    
     <ion-item>
-      <ion-label>calorias:</ion-label>
-      <ion-input [readonly]="true"   value="{{data.calorias}}">
+      <ion-label>Periodo:</ion-label>
+      <ion-input [readonly]="true"   value="{{data.periodo}}">
        
       </ion-input>
       </ion-item>
     
 
     <ion-item>
-      <ion-label>peso</ion-label>
-      <ion-input [readonly]="true"   value="{{data.peso}}">
+      <ion-label>Data</ion-label>
+      <ion-input [readonly]="true"   value="{{data.data}}">
        
       </ion-input>
        
@@ -35,8 +35,8 @@
     
 
     <ion-item>
-      <ion-label>porcao</ion-label>
-      <ion-input [readonly]="true"   value="{{data.porcao}}">
+      <ion-label>Hora</ion-label>
+      <ion-input [readonly]="true"   value="{{data.hora}}">
        
       </ion-input>
   
@@ -47,7 +47,7 @@
 
     <ion-item>
       
-      <ion-button [routerLink]="[ '/alimento-listar']" color="primary" size="small">
+      <ion-button [routerLink]="[ '/dieta-listar']" color="primary" size="small">
         Voltar
       </ion-button>
       &nbsp;

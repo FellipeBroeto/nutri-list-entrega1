@@ -50,7 +50,7 @@ export class ApiAlimentosService {
   // Get single alimento data by ID
   getItem(id): Observable<Alimento> {
     return this.http
-      .get<Alimento>(this.base_path + '/' + id, this.getHttpOptions())
+      .get<Alimento>(this.base_path + '/listar/' + id, this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -73,7 +73,7 @@ export class ApiAlimentosService {
   // Update item by id
   updateItem(id, item): Observable<Alimento> {
     return this.http
-      .put<Alimento>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())
+      .post<Alimento>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)

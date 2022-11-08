@@ -54,7 +54,7 @@ export class ApiPacienteService {
   // Get single paciente data by ID
   getItem(id): Observable<Paciente> {
     return this.http
-      .get<Paciente>(this.base_path + '/' + id, this.getHttpOptions())
+      .get<Paciente>(this.base_path + '/listar/' + id, this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -77,7 +77,7 @@ export class ApiPacienteService {
   // Update item by id
   updateItem(id, item): Observable<Paciente> {
     return this.http
-      .put<Paciente>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())
+      .post<Paciente>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)

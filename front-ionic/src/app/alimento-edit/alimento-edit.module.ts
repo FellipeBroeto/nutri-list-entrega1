@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AlimentoDetailPageRoutingModule } from './alimento-detail-routing.module';
+import { AlimentoEditPageRoutingModule } from './alimento-edit-routing.module';
 import {  ReactiveFormsModule } from '@angular/forms';
-import { AlimentoDetailPage } from './alimento-detail.page';
+import { AlimentoEditPage } from './alimento-edit.page';
 
-@NgModule({
+@NgModule({ 
   imports: [
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
     IonicModule,
-    AlimentoDetailPageRoutingModule
+    AlimentoEditPageRoutingModule
   ],
-  declarations: [AlimentoDetailPage]
+  declarations: [AlimentoEditPage]
 })
-export class AlimentoDetailPageModule {}
+export class AlimentoEditPageModule {}

@@ -35,7 +35,7 @@
 
   <ion-item>
     <ion-label>Porcao</ion-label>
-    <ion-input formControlName="porcao"  pattern="[0-9]{1,2}"  placeholder="porção"></ion-input>
+    <ion-input formControlName="porcao"    placeholder="porção"></ion-input>
   </ion-item>
   <div *ngIf="formAlimentos.controls.porcao.errors" class="px-3 text-danger">
     <p style="color:red"><small>Campo obrigatório</small></p>
@@ -52,7 +52,7 @@
   </ion-item>
 
   <div *ngIf="showErrMsg" class="px-3 text-danger">
-    <p style="color:red"><small>{{errMsg}}}}</small></p>
+    <p style="color:red"><small>{{errMsg}}</small></p>
   </div>
 
 </form>

@@ -47,7 +47,7 @@ export class ApiNutricionistaService {
   getItem(id): Observable<Nutricionista> {
        
     return this.http
-      .get<Nutricionista>(this.base_path + '/' + id, this.getHttpOptions())
+      .get<Nutricionista>(this.base_path + '/listar/' + id, this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -65,7 +65,7 @@ export class ApiNutricionistaService {
       
      
     return this.http
-      .get<Nutricionista>(this.base_path, this.getHttpOptions())
+      .get<Nutricionista>(this.base_path+"/listar", this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -79,7 +79,7 @@ export class ApiNutricionistaService {
        
 
     return this.http
-      .put<Nutricionista>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())
+      .post<Nutricionista>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)

@@ -1,12 +1,10 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>List All Dietas - </ion-title> 
+    
+    <ion-title ><ion-icon name="person-circle-outline"  (click)="detalharUsuario()"> </ion-icon></ion-icon>&nbsp;Dietas</ion-title> 
   </ion-toolbar>
 </ion-header>
-    
-<ion-button  (click)="logout()">
-  Sair
-</ion-button>
+
 
 <ion-content class="ion-padding">
   <table class="table">
@@ -14,25 +12,32 @@
       <tr>
         <th scope="col">Id&nbsp;</th>
         <th scope="col">Nome&nbsp;</th>
-        <th scope="col">Calorias&nbsp;</th>
-        <th scope="col">Peso&nbsp;</th>
-        <th scope="col">Porcao&nbsp;</th>
+        <th scope="col">Periodo&nbsp;</th>
+        <th scope="col">Data&nbsp;</th>
+        <th scope="col">Hora&nbsp;</th>
       </tr>
+
     </thead>
+    
     <tbody>
       <tr *ngFor="let item of dietasData">
         <td>{{ item.id }}</td>
         <td>{{ item.nome }}</td>
-        <td>{{ item.calorias }}</td>
-        <td>{{ item.peso }}</td>
-        <td>{{ item.porcao }}</td>
+        <td>{{ item.periodo }}</td>
+        <td>{{ item.data }}</td>
+        <td>{{ item.hora }}</td>
         <td style="display: flex">
-          <ion-button color="warning" size="small" routerLink='/dieta-edit/{{item.id}}'>
-            <ion-icon name="create"></ion-icon>
+          <ion-button color="primary" size="small" routerLink='/dieta-editar/{{item.id}}'>
+            <ion-icon name="create-outline"></ion-icon>
           </ion-button>
           <ion-button color="danger" size="small" (click)="delete(item)">
             <ion-icon name="trash"></ion-icon>
           </ion-button>
+          <ion-button color="primary" size="small" routerLink='/dieta-detalhar/{{item.id}}'>
+            <ion-icon name="eye"></ion-icon>
+           </ion-button>
+          
+
         </td>
       </tr>
     </tbody>
@@ -40,13 +45,23 @@
   
   <ion-item>
 
-    <ion-button color="primary"  [routerLink]="['/dieta-criar']">
+    <ion-button color="primary" size="small" [routerLink]="['/dieta-criar']">
       Adicionar Dieta
     </ion-button>
       &nbsp;
-    <ion-button color="tertiary" [routerLink]="['/alimento-listar']">
+    <ion-button color="primary" size="small" [routerLink]="['/alimento-listar']">
       Listar Alimentos
     </ion-button>
 
   </ion-item>
-</ion-content>
+    
+  &nbsp;
+  <ion-button expand="block" (click)="logout()" color="danger" size="Medium" >Sair</ion-button>
+
+
+
+<ion-footer>
+  <ion-toolbar center color="tertiary">
+    <ion-title>Nutrilist</ion-title>
+  </ion-toolbar>
+</ion-footer>

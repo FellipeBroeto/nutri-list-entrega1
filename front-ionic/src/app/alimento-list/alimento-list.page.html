@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>Listar Alimentos</ion-title>
+    <ion-title>Alimentos</ion-title> 
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="ion-padding">
   <table class="table">
@@ -10,11 +11,13 @@
       <tr>
         <th scope="col">Id&nbsp;</th>
         <th scope="col">Nome&nbsp;</th>
-        <th scope="col">Calorias&nbsp;</th>
-        <th scope="col">Peso&nbsp;</th>
-        <th scope="col">Porção&nbsp;</th>
+        <th scope="col">caloria&nbsp;</th>
+        <th scope="col">peso&nbsp;</th>
+        <th scope="col">porcao&nbsp;</th>
       </tr>
+
     </thead>
+    
     <tbody>
       <tr *ngFor="let item of alimentosData">
         <td>{{ item.id }}</td>
@@ -23,25 +26,37 @@
         <td>{{ item.peso }}</td>
         <td>{{ item.porcao }}</td>
         <td style="display: flex">
+          <ion-button color="primary" size="small" routerLink='/alimento-editar/{{item.id}}'>
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button color="danger" size="small" (click)="delete(item)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          <ion-button color="primary" size="small" routerLink='/alimento-detalhar/{{item.id}}'>
+            <ion-icon name="eye"></ion-icon>
+           </ion-button>
           
+
         </td>
       </tr>
     </tbody>
   </table>
-
-
+  
   <ion-item>
 
-  <ion-button color="primary" [routerLink]="['/dieta-listar']">
-    Listar Dieta
-  </ion-button>
-    &nbsp;
-  <ion-button color="tertiary" [routerLink]="['/alimento-criar']">
-    Adicionar Alimento
-  </ion-button>
+    <ion-button color="primary" size="small" [routerLink]="['/alimento-criar']">
+      Adicionar Alimentos
+    </ion-button>
+      &nbsp;
+    <ion-button color="primary" size="small" [routerLink]="['/dieta-listar']">
+      Listar Dieta
+    </ion-button>
 
   </ion-item>
+     
 
-  
-
-</ion-content>
+<ion-footer>
+  <ion-toolbar center color="tertiary">
+    <ion-title>Nutrilist</ion-title>
+  </ion-toolbar>
+</ion-footer>

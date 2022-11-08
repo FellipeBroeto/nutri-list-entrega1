@@ -10,18 +10,16 @@ use Illuminate\Support\Facades\Validator;
 class AlimentoController extends Controller
 {
 
-    //public function index() {
-        //$alimento = Alimento::all();
-        //return view('index');
 
-        //$alimento = Alimento::orderBy('id','desc')->paginate(5);
-        //return view('index', compact('alimentos'));
+    function listarById(Request $request){
 
-       // public function getAllAlimentos() {
-           // $alimentos = Alimento::get()->toJson(JSON_PRETTY_PRINT);
-           // return response($alimentos, 200);
-        //}
+        $alimento = Alimento::find($request->id);
 
+        return  response()->json(array(
+            'alimentos'=> $alimento
+        ), 200);
+
+    }
 
     function listar(Request $request){
 

@@ -5,8 +5,11 @@
   </ion-toolbar>
 </ion-header>
 
+
+
+
 <ion-content class="ion-padding">
- 
+
 <!--[formGroup]="formLogin"-->
   <form  [formGroup]="formLogin">
 
@@ -33,10 +36,18 @@
     
 
     <ion-item>
-      <ion-button color="primary" (click)="cadastro()" style="cursor: pointer;">Cadastro</ion-button>
+      <ion-button color="primary" (click)="cadastro()" style="cursor: pointer;">Cadastrar</ion-button>
       &nbsp;
-      <ion-button color="tertiary" (click)="login()" style="cursor: pointer;">Login</ion-button>
+      
+      <ion-button color="success" (click)="login()" style="cursor: pointer;">Login</ion-button>
     </ion-item>
 
   </form>
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar  color="tertiary">
+    <ion-title>Nutrilist</ion-title>
+  </ion-toolbar>
+</ion-footer>

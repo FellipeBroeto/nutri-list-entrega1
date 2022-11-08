@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AlimentoDetailPageRoutingModule } from './alimento-detail-routing.module';
+import { DietaEditPageRoutingModule } from './dieta-edit-routing.module';
 import {  ReactiveFormsModule } from '@angular/forms';
-import { AlimentoDetailPage } from './alimento-detail.page';
+import { DietaEditPage } from './dieta-edit.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { AlimentoDetailPage } from './alimento-detail.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AlimentoDetailPageRoutingModule
+    DietaEditPageRoutingModule
   ],
-  declarations: [AlimentoDetailPage]
+  declarations: [DietaEditPage]
 })
-export class AlimentoDetailPageModule {}
+export class DietaEditPageModule {}

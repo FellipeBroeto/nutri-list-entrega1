@@ -47,8 +47,6 @@ const routes: Routes = [
     loadChildren: () => import('./alimento-list/alimento-list.module').then( m => m.AlimentoListPageModule)
   },
 
-
-
   { 
     path: 'alimento-criar',
     redirectTo: 'alimento-criar', 
@@ -58,9 +56,14 @@ const routes: Routes = [
     path: 'alimento-criar',
     loadChildren: () => import('./alimento-create/alimento-create.module').then( m => m.AlimentoCreatePageModule)
   },
-
-  
-
+  {
+    path: 'alimento-detalhar/:id',
+    loadChildren: () => import('./alimento-detail/alimento-detail.module').then( m => m.AlimentoDetailPageModule)
+  },
+  {
+    path: 'alimento-editar/:id',
+    loadChildren: () => import('./alimento-edit/alimento-edit.module').then( m => m.AlimentoEditPageModule)
+  },
  
   /*DIETA*/
   { path: 'dieta-listar',
@@ -79,6 +82,15 @@ const routes: Routes = [
   {
     path: 'dieta-criar',
     loadChildren: () => import('./dieta-create/dieta-create.module').then( m => m.DietaCreatePageModule)
+  },
+
+  {
+    path: 'dieta-editar/:id',
+    loadChildren: () => import('./dieta-edit/dieta-edit.module').then( m => m.DietaEditPageModule)
+  },
+  {
+    path: 'dieta-detalhar/:id',
+    loadChildren: () => import('./dieta-detail/dieta-detail.module').then( m => m.DietaDetailPageModule)
   },
 
 

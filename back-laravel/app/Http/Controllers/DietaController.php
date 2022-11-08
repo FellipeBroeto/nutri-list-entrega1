@@ -11,11 +11,9 @@ class DietaController extends Controller
 {
 
 
-
-
     function listarById(Request $request){
 
-        $dieta = Dieta::all();
+        $dieta = Dieta::find($request->id);
 
         return  response()->json(array(
             'dietas'=> $dieta
@@ -41,9 +39,9 @@ class DietaController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nome' => 'required|string|max:255',
-            'periodo' => 'required|string|max:255',
-            'data' => 'required|date',
-            'hora' => 'required|date'
+            'periodo' => 'required|string|max:255'//,
+            //'data' => 'required|date',
+           // 'hora' => 'required|date'
         ]);
 
 
@@ -84,8 +82,8 @@ class DietaController extends Controller
         $validator = Validator::make($request->all(), [
             'nome' => 'required|string|max:255',
             'periodo' => 'required|string|max:255',
-            'data' => 'required|date',
-            'hora' => 'required|time'
+            //'data' => 'required|date',
+           // 'hora' => 'required|time'
         ]);
 
 

@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/usuario-logado', [AuthenticatedSessionController::class, 'usuario_logado']);
 
     #alimentos
+    Route::get('/alimentos/listar/{id}', [AlimentoController::class, 'listarById']);
     Route::get('/alimentos/listar', [AlimentoController::class, 'listar']);
     Route::post('/alimentos', [AlimentoController::class, 'adicionar']);
     Route::post('/alimentos/{id}', [AlimentoController::class, 'alterar']);

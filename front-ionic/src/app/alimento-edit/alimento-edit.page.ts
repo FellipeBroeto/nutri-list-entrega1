@@ -1,4 +1,4 @@
-//alimento-detail.page
+//alimento-edit.page
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alimento } from '../models/alimento';
@@ -7,16 +7,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-alimento-detail',
-  templateUrl: './alimento-detail.page.html',
-  styleUrls: ['./alimento-detail.page.scss'],
+  selector: 'app-alimento-edit',
+  templateUrl: './alimento-edit.page.html',
+  styleUrls: ['./alimento-edit.page.scss'],
 })
-export class AlimentoDetailPage implements OnInit {
+export class AlimentoEditPage implements OnInit {
 
 
   id: number;
   data: Alimento;
-  public formAlimento: FormGroup;
+  public formAlimentos: FormGroup;
   public showErrMsg:boolean = false;
   public errMsg:string = "";
   loading:any;
@@ -32,29 +32,41 @@ export class AlimentoDetailPage implements OnInit {
 
   ngOnInit() {
     
-    this.formAlimento = this.formBuilder.group({
+    this.formAlimentos = this.formBuilder.group({
       'nome': [null, [Validators.required]],
       'calorias': [null, [Validators.required]],
       'peso': [null, [Validators.required]],
       'porcao': [null, [Validators.required]],
-    }); 
+    });
     this.id = this.activatedRoute.snapshot.params["id"];
     //get item details using id
     this.apiService.getItem(this.id).subscribe(response => {
-      debugger
       console.log(response['alimentos']);
       this.data = response['alimentos'];
-      this.formAlimento.controls.nome.setValue(this.data.nome);
-      this.formAlimento.controls.calorias.setValue(this.data.calorias);
-      this.formAlimento.controls.peso.setValue(this.data.peso);
-      this.formAlimento.controls.porcao.setValue(this.data.porcao);
+      this.setDataForm();
     })
   }
+
+  setDataForm() {
+
+    this.formAlimentos.controls.nome.setValue(this.data.nome);
+    this.formAlimentos.controls.calorias.setValue(this.data.calorias);
+    this.formAlimentos.controls.peso.setValue(this.data.peso);
+    this.formAlimentos.controls.porcao.setValue(this.data.porcao);
+  } 
+  
+  getDadosForm() {
+    this.data.nome =  this.formAlimentos.controls.nome.value;
+    this.data.calorias =  this.formAlimentos.controls.calorias.value;
+    this.data.peso =  this.formAlimentos.controls.peso.value;
+    this.data.porcao =  this.formAlimentos.controls.porcao.value;
+   } 
 
   update() {
 
     debugger;
-    //Update item by taking id and updated data object
+  
+    this.getDadosForm();
     this.apiService.updateItem(this.id, this.data).subscribe(response => {
       this.router.navigate(['alimento-listar']);
     })

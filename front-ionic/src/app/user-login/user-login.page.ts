@@ -30,6 +30,10 @@ export class UserLoginPage implements OnInit {
             this.data = new UserLogin();      
   }
 
+  detalharUsuario() {
+
+  }
+
   ngOnInit() {
 
     this.formLogin = this.formBuilder.group({
