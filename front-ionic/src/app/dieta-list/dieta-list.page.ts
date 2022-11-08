@@ -27,6 +27,11 @@ export class DietaListPage implements OnInit {
     // this.getAllDietas();
   }
 
+
+  detalharUsuario() {
+    
+  }
+
   logout() {
     debugger;
     this.apiUserService.logout().subscribe(response => {      
