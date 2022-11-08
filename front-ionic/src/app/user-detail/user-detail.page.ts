@@ -42,6 +42,8 @@ export class UserDetailPage implements OnInit {
       debugger
 
       this.apiService.getItem(this.id).subscribe(response => {
+
+        debugger;
       
         this.data = response['user'];
         this.formUserDetail.controls.nome.setValue(this.data.nome);

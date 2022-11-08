@@ -55,9 +55,7 @@ class AuthenticatedSessionController extends Controller
             return  response()->json(array(
                 'message'=>'success',
                 'user'=> $request->user(),
-                'nutricionista'=> $find,
-                'access_token' => $token,
-                'token_type' => 'Bearer',
+                'nutricionista'=> $find
             ), 200);
 
 

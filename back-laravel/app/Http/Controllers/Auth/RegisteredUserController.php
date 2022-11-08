@@ -148,10 +148,12 @@ class RegisteredUserController extends Controller
 
             Log::info("valida6");
             //validar nutricionista ou paciente
-            if($request->id_tipo_user===1){
+            if($request->id_tipo_user==1){
+                 Log::info("valida7");
                 RegisteredUserController::adicionarNutricionista($request,  $user_id);
             //paciente
-            }elseif($request->id_tipo_user===1){
+            }else{
+                Log::info("valida8");
                 RegisteredUserController::adicionarPaciente($request,  $user_id);
             }
 
