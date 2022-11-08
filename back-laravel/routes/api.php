@@ -6,6 +6,7 @@ use App\Http\Controllers\AlimentoController;
 use App\Http\Controllers\NutricionistaController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\DietaController;
+use App\Http\Controllers\DietaUserController;
 use App\Http\Controllers\DietaAlimentoController;
 use App\Http\Controllers\PacienteNutricionistaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -37,6 +38,8 @@ Route::middleware('auth:sanctum')->group(function () {
     #usuario logado
     Route::get('/usuario-logado', [AuthenticatedSessionController::class, 'usuario_logado']);
 
+    #usuarios
+    Route::get('/usuario/listar', [DietaUserController::class, 'listarUsers']);
 
     #alimentos
     Route::get('/dietas/listar/alimentos/{id}', [DietaController::class, 'listarDietaByIdUser']);

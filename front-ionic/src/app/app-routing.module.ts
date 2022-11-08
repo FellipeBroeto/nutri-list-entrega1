@@ -25,11 +25,11 @@ const routes: Routes = [
   }, 
 
    
-  /*DETALHAR-CADASTRO*/
-  {
-    path: 'detalhar-usuario/:id',
-    loadChildren: () => import('./user-detail/user-detail.module').then( m => m.UserDetailPageModule)
-  },
+    /*DETALHAR-CADASTRO*/
+    {
+      path: 'detalhar-usuario/:id',
+      loadChildren: () => import('./user-detail/user-detail.module').then( m => m.UserDetailPageModule)
+    },
     
   
   /*ALIMENTOS*/
@@ -88,7 +88,11 @@ const routes: Routes = [
     path: 'dieta-detalhar/:id',
     loadChildren: () => import('./dieta-detail/dieta-detail.module').then( m => m.DietaDetailPageModule)
   },
-
+  
+  {
+    path: 'dieta-enviar/:id',
+    loadChildren: () => import('./dieta-enviar/dieta-enviar.module').then( m => m.DietaEnviarPageModule)
+  }
 
 ];
 

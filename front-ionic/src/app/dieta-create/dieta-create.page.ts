@@ -2,6 +2,7 @@ import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Dieta } from '../models/dieta';
 import { ApiDietasService } from '../../services/api-dietas.service';
+import { ApiAlimentosService } from '../../services/api-alimentos.service'; 
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -13,31 +14,76 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class DietaCreatePage implements OnInit {
 
   public data: Dieta;
+  dataAlimentos: any;
+  dataAlimentosDieta: any;
+  alimentoDieta: any;
   public formDieta: FormGroup;
+  public formAlimento: FormGroup;
   public showErrMsg:boolean = false;
   public errMsg:string = "";
   loading:any;
+  totalCalorias:number;
 
-  constructor(private loadingCtrl: LoadingController, private formBuilder: FormBuilder, public apiService: ApiDietasService, public router: Router) { 
+  constructor(
+    public apiAlimentosService: ApiAlimentosService,
+    private loadingCtrl: LoadingController, 
+    private formBuilder: FormBuilder,
+    public apiService: ApiDietasService, public router: Router) { 
     this.data = new Dieta();
   }
 
   ngOnInit() {
+    this.totalCalorias = 0;
+    this.dataAlimentosDieta = [];
+
     this.formDieta = this.formBuilder.group({
       'nome': [null, [Validators.required]],
       'periodo': [null, [Validators.required]],
       'data': [null, [Validators.required]],
-      'hora': [null, [Validators.required]],
+      'hora': [null, [Validators.required]]
     });
 
-      //limpar form
-      this.limparForm();
+    this.formAlimento = this.formBuilder.group({
+       'alimento': [null, []],
+    });
+
+    //limpar form
+    this.limparForm();
+
+    this.getAllAlimentos();
+ 
+
   }
 
   
+  deleteItemDieta(item) {
+    debugger;
+
+    this.totalCalorias -= (item.calorias);
+
+     for(let i=0; i < this.dataAlimentosDieta.length; i++){
+        if(this.dataAlimentosDieta[i].id==item.id){
+          this.dataAlimentosDieta.splice(i);
+        }
+     }    
+     debugger;
+  }
+
+  addAlimentoDieta(item) {
+
+    debugger;
+    let aux =  this.dataAlimentos.filter(alimento => alimento.id === parseInt(item.detail.value));
+    this.totalCalorias += aux[0].calorias;
+    this.dataAlimentosDieta.push(aux[0])
+
+  }
+    
   
   limparForm() {
     
+
+    this.dataAlimentosDieta = []
+    this.formAlimento.controls.alimento.setValue("");
     this.data.data = "";
     this.data.hora = "";
     this.data.nome  = "";
@@ -93,6 +139,16 @@ export class DietaCreatePage implements OnInit {
       this.loading.dismiss();
     });
 
+  }
+
+  
+  getAllAlimentos() {
+        
+    this.apiAlimentosService.getList().subscribe(response => {
+    debugger
+      this.dataAlimentos = [];
+      this.dataAlimentos = response['alimentos'];
+    })
   }
 
   voltar() {    

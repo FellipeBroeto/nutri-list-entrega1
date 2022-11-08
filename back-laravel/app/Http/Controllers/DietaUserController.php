@@ -4,11 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DietaUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 
 class DietaUserController extends Controller
 {
+
+
+    function listarUsers(Request $request){
+
+        $users = User::all();
+
+        return  response()->json(array(
+            'users'=> $users
+        ), 200);
+
+    }
 
     function listar(Request $request){
 

@@ -1,6 +1,7 @@
 //dieta-list.page.ts
 import { Component, OnInit } from '@angular/core';
 import { ApiDietasService } from '../../services/api-dietas.service';
+import { ApiAlimentosService } from 'src/services/api-alimentos.service';
 import { ApiUserLoginsService } from '../../services/api-user-login.service';
 import { Router } from '@angular/router';
 
@@ -14,10 +15,11 @@ import { Router } from '@angular/router';
 export class DietaListPage implements OnInit {
 
   dietasData: any;
+  dataAlimentos: any;
   userId: any;
 
   constructor(
-    public apiService: ApiDietasService,
+    public apiService: ApiDietasService,    
     public apiUserService: ApiUserLoginsService,
     public router: Router,
     
@@ -64,7 +66,7 @@ export class DietaListPage implements OnInit {
       this.dietasData = response['dietas'];
     })
   }
-
+ 
 
   delete(item) {
     //Delete item in Dieta data

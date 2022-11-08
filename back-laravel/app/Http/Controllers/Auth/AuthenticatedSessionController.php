@@ -71,11 +71,7 @@ class AuthenticatedSessionController extends Controller
 
         }
 
-
-
-
     }
-
 
 
     public function logar(LoginRequest $request)

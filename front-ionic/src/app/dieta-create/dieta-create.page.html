@@ -1,16 +1,22 @@
 <!--dieta-create.html -->
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>CreateDieta</ion-title>
+    <ion-title>Criar nova dieta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
+ 
+  
+  <ion-title>
+    <b>Dados Dieta</b> 
+  </ion-title>
+
   <form  [formGroup]="formDieta">
 
     <ion-item>
-      <ion-label>nome</ion-label>
+      <ion-label>Nome</ion-label>
       <ion-input formControlName="nome" placeholder="Nome"></ion-input>
     </ion-item> 
     <div *ngIf="formDieta.controls.nome.errors" class="px-3 text-danger">
@@ -18,7 +24,7 @@
     </div>
 
     <ion-list>
-      <ion-label>periodo</ion-label>
+      <ion-label>Periodo</ion-label>
       <ion-item>
         <ion-select  formControlName="periodo" placeholder="Selecione">
           <ion-select-option value="">Selecione</ion-select-option>
@@ -35,7 +41,7 @@
     </div>
 
     <ion-item>
-      <ion-label>data</ion-label>
+      <ion-label>Data</ion-label>
       <ion-datetime presentation="date" displayFormat="YYYY-MM-DD" formControlName="data" >
         </ion-datetime><!--placeholder="2022-01-01"-->
     </ion-item>
@@ -44,7 +50,7 @@
     </div>
 
     <ion-item>
-      <ion-label>hora</ion-label>
+      <ion-label>Hora</ion-label>
       <ion-datetime presentation="date-time" displayFormat="YYYY-MM-DD HH:mm" formControlName="hora" >
         <span slot="time-label">Hora</span>
       </ion-datetime><!--placeholder="2022-01-01 08:00"-->
@@ -52,13 +58,80 @@
     <div *ngIf="formDieta.controls.hora.errors" class="px-3 text-danger">
       <p style="color:red"><small>Campo obrigatório</small></p>
     </div>
+ 
+  </form>
+
+  <br>
+  <ion-title>
+    <b>Adicionar Alimentos</b> 
+  </ion-title>
+  
+    <ion-list>
+      <ion-label>Alimentos</ion-label>
+      <ion-item>
+        <ion-select placeholder="Selecione" (ionChange)="addAlimentoDieta($event)" >
+          <ion-select-option value="" >Selecione</ion-select-option>
+          <ng-container *ngFor="let item of dataAlimentos">              
+            <ion-select-option value="{{item.id}}">{{item.nome}}</ion-select-option>                           
+          </ng-container>    
+              
+        </ion-select>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </ion-item>
+    </ion-list> 
+
+    <ion-item>
+      <table class="table" *ngIf="dataAlimentosDieta.length>0 ">
+        <thead>
+          <tr>
+            <th scope="col">&nbsp;Id&nbsp;</th>
+            <th scope="col">&nbsp;Nome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th scope="col">&nbsp;calorias&nbsp;</th>
+            <th scope="col">&nbsp;peso&nbsp;</th>
+            <th scope="col">&nbsp;porcao&nbsp;</th>
+          </tr>
+    
+        </thead>
+        
+        <tbody>
+          <tr *ngFor="let item of dataAlimentosDieta">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.calorias }}</td>
+            <td>{{ item.peso }}</td>
+            <td>{{ item.porcao }}</td>
+            <td style="display: flex">
+               
+              <ion-button color="danger" size="small" (click)="deleteItemDieta(item)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button> 
+    
+            </td>
+          </tr>
+
+          <tr>
+            <td> </td>
+            <td> total calorias:</td>
+            <td> {{totalCalorias}} kcal</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </ion-item>
+
+    
+
+
   
 
     <ion-item>
       <ion-button  color="primary"  (click)="voltar()">Voltar
       </ion-button>
       &nbsp;
-      <ion-button  color="tertiary" (click)="submitForm()">Add
+      <ion-button  color="primary" (click)="submitForm()">Salvar Dieta
       </ion-button>
     </ion-item>
 
@@ -66,8 +139,15 @@
       <p style="color:red"><small>{{errMsg}}}}</small></p>
     </div>
     
+
   
 
-</form>
+
+  
+
+
+<ion-toolbar center color="tertiary">
+  <ion-title>Nutrilist</ion-title>
+</ion-toolbar>
 
 </ion-content>

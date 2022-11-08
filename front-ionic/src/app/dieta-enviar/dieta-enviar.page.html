@@ -1,0 +1,47 @@
+
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title> Enviar Dieta Paciente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  
+  <form  [formGroup]="formDieta">
+      
+      <ion-list>
+        <ion-label>Paciente</ion-label>
+        <ion-item>
+          <ion-select placeholder="Selecione">
+            <ion-select-option value="">Selecione</ion-select-option>
+            
+            <ng-container *ngFor="let item of dataUsers">              
+              <ion-select-option value="{{item.id}}">{{item.email}}</ion-select-option>                           
+            </ng-container>            
+          </ion-select>
+        </ion-item>
+      </ion-list> 
+   
+  
+
+    <ion-item>
+      
+      <ion-button [routerLink]="[ '/dieta-listar']" color="primary" size="small">
+        Voltar
+      </ion-button>
+      <ion-button [routerLink]="[ '/dieta-listar']" color="primary" size="small">
+        enviar
+      </ion-button>
+      &nbsp;
+      
+    </ion-item>
+    
+ 
+
+   
+
+    </form>
+
+  
+</ion-content>

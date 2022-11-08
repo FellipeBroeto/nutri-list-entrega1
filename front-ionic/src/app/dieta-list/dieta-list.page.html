@@ -26,22 +26,25 @@
         <td>{{ item.data }}</td>
         <td>{{ item.hora }}</td>
         <td style="display: flex">
-          <ion-button color="primary" size="small" routerLink='/dieta-editar/{{item.id}}'>
-            <ion-icon name="create-outline"></ion-icon>
+          <ion-button  color="primary" size="small" routerLink='/dieta-editar/{{item.id}}'>
+            <ion-icon name="create-outline" ></ion-icon>           
           </ion-button>
           <!--ion-button color="danger" size="small" (click)="delete(item)">
             <ion-icon name="trash"></ion-icon>
           </!--ion-button-->
           <ion-button color="primary" size="small" routerLink='/dieta-detalhar/{{item.id}}'>
             <ion-icon name="eye"></ion-icon>
-           </ion-button>
+           </ion-button> 
+
+           <ion-button color="primary" size="small" routerLink='/dieta-enviar/{{item.id}}'>            
+            <ion-icon name="open-outline"></ion-icon>
+           </ion-button> 
           
 
         </td>
       </tr>
     </tbody>
-  </table>
-  
+  </table> 
   <ion-item>
 
     <ion-button color="primary" size="small" [routerLink]="['/dieta-criar']">
@@ -53,10 +56,11 @@
     </ion-button>
 
   </ion-item>
-    
+  <ion-button [routerLink]="[ '/alimento-listar']" color="primary" size="small">
+    Voltar
+  </ion-button> 
   &nbsp;
-  <ion-button expand="block" (click)="logout()" color="danger" size="Medium" >Sair</ion-button>
-
+  <ion-button expand="block" (click)="logout()" color="danger" size="small" >Sair</ion-button>
 
 
 <ion-footer>
