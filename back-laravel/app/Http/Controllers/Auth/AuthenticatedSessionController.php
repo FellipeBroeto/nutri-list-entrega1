@@ -8,6 +8,9 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Nutricionista;
+use App\Models\Paciente;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -40,7 +43,39 @@ class AuthenticatedSessionController extends Controller
 
     public function usuario_logado(Request $request)
     {
-        return $request->user();
+
+
+        $user = $request->user();
+        $resultUser = User::find( $user->id);
+        //Log::info("resultUser:".$resultUser->id_tipo_user);
+
+        if($resultUser->id_tipo_user=="2"){
+            $find = Nutricionista::where('user_id','=',$user->id) -> first();
+
+            return  response()->json(array(
+                'message'=>'success',
+                'user'=> $request->user(),
+                'nutricionista'=> $find,
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+            ), 200);
+
+
+        }else{
+
+            $find = Paciente::where('user_id','=',$user->id) -> first();
+
+            return  response()->json(array(
+                'message'=>'success',
+                'user'=> $request->user(),
+                'paciente'=> $find
+            ), 200);
+
+        }
+
+
+
+
     }
 
 

@@ -62,15 +62,11 @@ export class DietaCreatePage implements OnInit {
 
     debugger;
 
-    this.data.data = 
-        this.formDieta.controls.data.value.substring(0,10);
-
-    this.data.hora = this.formDieta.controls.hora.value;
-        this.formDieta.controls.hora.value.substring(0,10)+" "+
-        this.formDieta.controls.hora.value.substring(11,16);
-    
+    this.data.data = this.formDieta.controls.data.value.substring(0,10);
+    this.data.hora = this.formDieta.controls.hora.value.substring(0,10)+" "+this.formDieta.controls.hora.value.substring(11,16);
     this.data.nome = this.formDieta.controls.nome.value;
     this.data.periodo = this.formDieta.controls.periodo.value;
+    this.data.user_id  = localStorage.getItem('user_id');
 
     this.showLoading();
 

@@ -109,12 +109,16 @@ export class ApiUserLoginsService {
   // Get single userlogin data by ID
   getItem(id): Observable<UserLogin> {
     return this.http
-      .get<UserLogin>(this.base_path + '/' + id, this.getHttpOptions())
+      //.get<UserLogin>(this.base_path + '/listar/' + id, this.getHttpOptions())
+      .get<UserLogin>(this.base_path + '/usuario-logado', this.getHttpOptions())
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
+
+
+  
 
   getList(): Observable<UserLogin> { 
        return this.http

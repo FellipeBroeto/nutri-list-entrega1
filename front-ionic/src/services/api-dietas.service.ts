@@ -67,6 +67,19 @@ export class ApiDietasService {
 
   }
 
+    // Get dietas data
+    getListByUserId(id): Observable<Dieta> {
+ 
+      debugger
+      return this.http
+        .get<Dieta>(this.base_path+'/listar/user/'+id, this.getHttpOptions())
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
+  
+    }
+
   // Update item by id
   updateItem(id, item): Observable<Dieta> {
     return this.http

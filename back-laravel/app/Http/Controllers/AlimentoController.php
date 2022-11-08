@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\Validator;
 class AlimentoController extends Controller
 {
 
+    function listarAlimentoByIdDieta(Request $request){
+
+        $result = Alimento::leftJoin('dieta_alimentos', function($join) {
+          $join->on('alimentos.id', '=', 'dieta_alimentos.alimento_id');
+        })
+        ->where('dieta_alimentos.dieta_id', '=', $request->id)
+        ->get();
+
+        return  response()->json(array(
+            'dietas'=> $result
+        ), 200);
+
+    }
+
 
     function listarById(Request $request){
 

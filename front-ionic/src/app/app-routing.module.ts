@@ -23,18 +23,14 @@ const routes: Routes = [
     path: 'criar-usuario',
     loadChildren: () => import('./user-create/user-create.module').then( m => m.UserLoginCreatePageModule)
   }, 
- 
- 
-    /*FINALIZAR-CADASTRO*/
-    { path: 'finalizar-cadastro',
-    redirectTo: 'finalizar-cadastro-usuario'
-    },
-    {
-      path: 'finalizar-cadastro-usuario',
-      loadChildren: () => import('./finalizar-cadastro/finalizar-cadastro.module').then( m => m.FinalizarCadastroPageModule),
-      pathMatch: 'full' 
-    },
-  
+
+   
+  /*DETALHAR-CADASTRO*/
+  {
+    path: 'detalhar-usuario/:id',
+    loadChildren: () => import('./user-detail/user-detail.module').then( m => m.UserDetailPageModule)
+  },
+    
   
   /*ALIMENTOS*/
    

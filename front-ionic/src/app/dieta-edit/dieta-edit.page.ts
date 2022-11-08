@@ -59,10 +59,16 @@ export class DietaEditPage implements OnInit {
   }
 
   getDadosForm() {
-   this.data.nome =  this.formDieta.controls.nome.value;
-   this.data.periodo =  this.formDieta.controls.periodo.value;
-   this.data.data =  this.formDieta.controls.data.value;
-   this.data.hora =  this.formDieta.controls.hora.value;
+
+    let user_id  = localStorage.getItem('user_id');
+
+    this.data.nome =  this.formDieta.controls.nome.value;
+    this.data.periodo =  this.formDieta.controls.periodo.value;
+    this.data.data =  this.formDieta.controls.data.value;
+    this.data.hora =  this.formDieta.controls.hora.value;
+    this.data.user_id =  user_id;
+   
+
   } 
 
   update() {

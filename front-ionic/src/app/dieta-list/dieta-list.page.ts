@@ -14,17 +14,21 @@ import { Router } from '@angular/router';
 export class DietaListPage implements OnInit {
 
   dietasData: any;
+  userId: any;
 
   constructor(
     public apiService: ApiDietasService,
     public apiUserService: ApiUserLoginsService,
-    public router: Router
+    public router: Router,
+    
+
   ) {
     this.dietasData = [];
   }
 
   ngOnInit() {
-    // this.getAllDietas();
+  
+    this.userId  = localStorage.getItem('user_id');
   }
 
 
@@ -49,9 +53,14 @@ export class DietaListPage implements OnInit {
   
   getAllDietas() {
     
-    this.apiService.getList().subscribe(response => {
+
+    
+    let user_id  = localStorage.getItem('user_id');
+    //this.apiService.getListByUserId(user_id).subscribe(response => {
+      this.apiService.getList().subscribe(response => {
       debugger
       console.log(response);
+      this.dietasData = [];
       this.dietasData = response['dietas'];
     })
   }

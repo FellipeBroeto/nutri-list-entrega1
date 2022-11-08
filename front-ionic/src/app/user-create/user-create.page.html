@@ -26,6 +26,28 @@
     </div>
     
   
+
+    <div>
+      <b>Selecione Tipo Usuario</b>
+      <ion-list>
+        <ion-radio-group value="tipo_user">
+          <ion-item>
+            <ion-label>Paciente</ion-label>
+            <ion-radio slot="end" value="Paciente"  (click)="open('paciente')" checked></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Nutricionista</ion-label>
+            <ion-radio slot="end" value="nutricionista" (click)="open('nutri')" ></ion-radio>
+          </ion-item>
+       
+        </ion-radio-group>
+      </ion-list>
+  
+    </div>
+
+
+    
     <ion-item>
       <ion-label>Senha</ion-label>
       <ion-input type="password" formControlName="password"  placeholder=""> </ion-input>
@@ -49,6 +71,71 @@
         <p style="color:red"><small>{{errMsg}}</small></p>
       </div>
     </ion-item>
+
+
+    <div id="paciente" [hidden]="showPac">
+      <p><b>Paciente</b></p> 
+  
+      <ion-item>
+        <ion-label>nascimento</ion-label>
+        <ion-datetime presentation="nascimento" displayFormat="YYYY-MM-DD" formControlName="nascimento" >
+        </ion-datetime><!--placeholder="2022-01-01"-->
+       
+      </ion-item>
+      
+  
+      <div *ngIf="formCadastro.controls.nascimento.errors" class="px-3 text-danger">
+        <p style="color:red" ><small>Campo obrigatório</small></p>
+      </div>
+    
+      <ion-item>
+        <ion-label>peso</ion-label>
+        <ion-input formControlName="peso" placeholder="1"></ion-input>
+      </ion-item>
+      <div *ngIf="formCadastro.controls.peso.errors" class="px-3 text-danger">
+        <p style="color:red" ><small>Campo obrigatório</small></p>
+      </div>
+    
+      <ion-item>
+        <ion-label>altura</ion-label>
+        <ion-input formControlName="altura" placeholder="1"></ion-input>
+      </ion-item>
+      <div *ngIf="formCadastro.controls.altura.errors" class="px-3 text-danger">
+        <p style="color:red" ><small>Campo obrigatório</small></p>
+      </div>
+       
+      <ion-list>
+        <ion-label>sexo</ion-label>
+        <ion-item>
+          <ion-select  formControlName="sexo" placeholder="Selecione">
+           
+            <ion-select-option value="F">Feminino</ion-select-option>
+            <ion-select-option value="M">Masculino</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list> 
+       
+          
+      <div *ngIf="formCadastro.controls.sexo.errors" class="px-3 text-danger">
+        <p style="color:red" ><small>Campo obrigatório</small></p>
+      </div> 
+    </div>
+
+
+    <div id="nutricionista" [hidden]="!showPac">
+      <p><b>Nutricionista</b></p> 
+      <ion-item>
+        <ion-label>crn</ion-label>
+        <ion-input formControlName="crn" placeholder=""></ion-input>
+      </ion-item>
+  
+      
+      <div *ngIf="formCadastro.controls.crn.errors" class="px-3 text-danger">
+        <p style="color:red" ><small>Campo obrigatório</small></p>
+      </div> 
+    </div>
+  
+    
   
     <ion-item>
       
