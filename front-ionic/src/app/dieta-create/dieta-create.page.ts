@@ -113,10 +113,13 @@ export class DietaCreatePage implements OnInit {
     this.data.nome = this.formDieta.controls.nome.value;
     this.data.periodo = this.formDieta.controls.periodo.value;
     this.data.user_id  = localStorage.getItem('user_id');
-
+    this.data.lista_alimentos = this.dataAlimentosDieta;
+    
     this.showLoading();
 
-    this.apiService.createItem(this.data).subscribe((response) => {
+    this.apiService.createItem(this.data).subscribe((response) => { 
+
+       
       this.router.navigate(['dieta-listar']);
       
       

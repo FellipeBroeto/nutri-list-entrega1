@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dieta;
+use App\Models\DietaAlimento;
 use App\Models\DietaUser;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -79,8 +80,35 @@ class DietaController extends Controller
             'periodo' => $request->periodo,
             'data' => $request->data,
             'hora' => $request->hora,
+
+
         ]);
 
+
+        Log::info("lista_alimentos-init");
+        $lista=$request ->lista_alimentos;
+        Log::info("lista_alimentos-size:".count($lista));
+
+        for($i=0; $i< count($lista);$i++){
+
+            $alimento_id=$lista[$i]['id'];
+
+            Log::info("lista_alimentos-1");
+            $dietaAlimentos=new DietaAlimento;
+            Log::info("lista_alimentos-2");
+            $dietaAlimentos->dieta_id=$result1->id;
+            Log::info("lista_alimentos-3:".$dietaAlimentos->dieta_id);
+            $dietaAlimentos->alimento_id = $alimento_id;
+            Log::info("lista_alimentos-4:".$dietaAlimentos->alimento_id);
+            $resultDietaAlim=$dietaAlimentos->Save();
+            Log::info("lista_alimentos-5");
+
+            Log::info("lista_alimentos-id:".$lista[$i]['id']);
+            Log::info("dieta-id:".$result1->id);
+
+        }
+
+        Log::info("lista_alimentos-fim");
 
         $dietauser=new DietaUser;
         $dietauser->dieta_id=$result1->id;
@@ -182,4 +210,57 @@ class DietaController extends Controller
         }
     }
 
+
+    function associarDietaUsuario(Request $request){
+
+
+        $id_dieta =($request->id_dieta);
+        $id_usuario =($request->id_usuario);
+
+        return  response()->json(array(
+            'message'=>'salvo com sucesso!'
+        ), 200);
+
+
+    }
+
+    function desassociarDietaUsuario(Request $request){
+
+
+        $id_dieta =($request->id_dieta);
+        $id_usuario =($request->id_usuario);
+
+        return response()->json([
+            'message'=>'sucesso!'
+        ], 200);
+
+
+
+    }
+    function associarAlimentoDieta(Request $request){
+
+
+        $id_dieta =($request->id_dieta);
+        $id_alimento =($request->id_alimento);
+
+        return response()->json([
+            'message'=>'sucesso!'
+        ], 200);
+
+
+    }
+
+    function desassociarAlimentoDieta(Request $request){
+
+
+        $id_dieta =($request->id_dieta);
+        $id_alimento =($request->id_alimento);
+
+        return response()->json([
+            'message'=>'sucesso!'
+        ], 200);
+
+
+    }
 }
+

@@ -5,4 +5,5 @@ export class Dieta {
     periodo: string;
     data: string;
     hora: string;
+    lista_alimentos:any;
 }

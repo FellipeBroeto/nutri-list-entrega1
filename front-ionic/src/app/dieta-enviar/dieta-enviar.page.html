@@ -13,7 +13,7 @@
       <ion-list>
         <ion-label>Paciente</ion-label>
         <ion-item>
-          <ion-select placeholder="Selecione">
+          <ion-select placeholder="Selecione" formControlName="paciente" >
             <ion-select-option value="">Selecione</ion-select-option>
             
             <ng-container *ngFor="let item of dataUsers">              
@@ -30,7 +30,8 @@
       <ion-button [routerLink]="[ '/dieta-listar']" color="primary" size="small">
         Voltar
       </ion-button>
-      <ion-button [routerLink]="[ '/dieta-listar']" color="primary" size="small">
+      <ion-button (click)="associarDieta()" color="primary" size="small">
+        
         enviar
       </ion-button>
       &nbsp;

@@ -16,7 +16,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class DietaEnviarPage implements OnInit {
 
 
-  id: number;
+  idUsuario: number;
+  idDieta: number;
+  
+ 
   data: Dieta;
   dataUsers: Users;
   public formDieta: FormGroup;
@@ -33,32 +36,42 @@ export class DietaEnviarPage implements OnInit {
   ) {
     this.data = new Dieta();
   }
+  
+  associarDieta() {
+
+    debugger
+    this.idUsuario = this.formDieta.controls.paciente.value;
+
+    this.apiService.associarDietaUsuario(this.idUsuario, this.idDieta).subscribe(response => {
+        debugger;
+        console.log("sucess");
+        this.router.navigate(['dieta-listar']);
+    }, error => {
+      debugger
+      console.log(error)
+    }); 
+
+
+  }
+
 
   ngOnInit() {
     
     this.formDieta = this.formBuilder.group({
-      'nome': [null, [Validators.required]],
-      'periodo': [null, [Validators.required]],
-      'data': [null, [Validators.required]],
-      'hora': [null, [Validators.required]],
+      'paciente': [null, [Validators.required]] 
     }); 
-    this.id = this.activatedRoute.snapshot.params["id"];
-    //get item enviars using id
-    this.apiService.getItem(this.id).subscribe(response => {
-      
-        console.log(response['dietas']);
-        this.data = response['dietas'];
-        this.formDieta.controls.nome.setValue(this.data.nome);
-        this.formDieta.controls.periodo.setValue(this.data.periodo);
-        this.formDieta.controls.data.setValue(this.data.data);
-        this.formDieta.controls.hora.setValue(this.data.hora); 
  
+       
+    this.idDieta = this.activatedRoute.snapshot.params["id"];
+    //get item enviars using id
+    this.apiService.getItem(this.idDieta).subscribe(response => {
+       //carregar combo usuarios
         this.apiUserService.getList().subscribe(response => {
           this.dataUsers = response['users'];
-        });
-    
+        }); 
 
     });
+
   }
 /*
   update() {

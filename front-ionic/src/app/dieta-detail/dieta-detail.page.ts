@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Dieta } from '../models/dieta';
 import { ApiDietasService } from '../../services/api-dietas.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { ApiAlimentosService } from './../../services/api-alimentos.service';
 
 @Component({
   selector: 'app-dieta-detail',
@@ -16,6 +16,7 @@ export class DietaDetailPage implements OnInit {
 
   id: number;
   data: Dieta;
+  alimentosData:string;
   public formDieta: FormGroup;
   public showErrMsg:boolean = false;
   public errMsg:string = "";
@@ -25,7 +26,9 @@ export class DietaDetailPage implements OnInit {
     private formBuilder: FormBuilder,
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    public apiService: ApiDietasService
+    public apiService: ApiDietasService,
+    public apiServiceAlimentos: ApiAlimentosService
+
   ) {
     this.data = new Dieta();
   }
@@ -58,5 +61,20 @@ export class DietaDetailPage implements OnInit {
       this.router.navigate(['dieta-listar']);
     })
   }
+  
 
+  ionViewWillEnter() {
+    this.getAllAlimentos();
+  }
+
+  getAllAlimentos() {
+    
+    this.apiService.getList().subscribe(response => {
+
+      
+      
+      console.log(response);
+      this.alimentosData = response['alimentos'];
+    })
+  }
 }
