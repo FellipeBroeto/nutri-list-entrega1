@@ -50,7 +50,9 @@ export class DietaDetailPage implements OnInit {
       this.formDieta.controls.periodo.setValue(this.data.periodo);
       this.formDieta.controls.data.setValue(this.data.data);
       this.formDieta.controls.hora.setValue(this.data.hora);
-    })
+    });
+    debugger
+    this.getAllAlimentos();
   }
 
   update() {
@@ -63,13 +65,11 @@ export class DietaDetailPage implements OnInit {
   }
   
 
-  ionViewWillEnter() {
-    this.getAllAlimentos();
-  }
+ 
 
   getAllAlimentos() {
     
-    this.apiService.getList().subscribe(response => {
+    this.apiServiceAlimentos.getList().subscribe(response => {
 
       
       

@@ -70,8 +70,44 @@
       <p style="color:red"><small>{{errMsg}}}}</small></p>
     </div>
     
-  
+  <br/>
+  <br/>
 
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">&nbsp;Id&nbsp;</th>
+        <th scope="col">&nbsp;Nome&nbsp;</th>
+        <th scope="col">&nbsp;calorias&nbsp;</th>
+        <th scope="col">&nbsp;peso&nbsp;</th>
+        <th scope="col">&nbsp;porcao&nbsp;</th>
+      </tr>
+
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let item of alimentosData">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.calorias }}</td>
+        <td>{{ item.peso }}</td>
+        <td>{{ item.porcao }}</td>
+        <td style="display: flex">
+          <!--ion-button color="primary" size="small" routerLink='/alimento-editar/{{item.id}}'>
+            <ion-icon name="create-outline"></ion-icon>
+          </!--ion-button-->
+          <ion-button color="danger" size="small" (click)="delete(item)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          <!--ion-button color="primary" size="small" routerLink='/alimento-detalhar/{{item.id}}'>
+            <ion-icon name="eye"></ion-icon>
+           </!--ion-button-->
+          
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </form>
 
   

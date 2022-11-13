@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Dieta } from '../models/dieta';
 import { ApiDietasService } from '../../services/api-dietas.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ApiAlimentosService } from './../../services/api-alimentos.service';
 
 
 @Component({
@@ -20,12 +21,14 @@ export class DietaEditPage implements OnInit {
   public showErrMsg:boolean = false;
   public errMsg:string = "";
   loading:any;
+  alimentosData:string;
 
   constructor(
     private formBuilder: FormBuilder,
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    public apiService: ApiDietasService
+    public apiService: ApiDietasService,
+    public apiServiceAlimentos: ApiAlimentosService
   ) {
     this.data = new Dieta();
   }
@@ -46,9 +49,21 @@ export class DietaEditPage implements OnInit {
       this.data = response['dietas'];
       this.setDadosData();
       
-    })
+    });
+    this.getAllAlimentos();
   }
 
+
+  getAllAlimentos() {
+    
+    this.apiServiceAlimentos.getList().subscribe(response => {
+
+      
+      
+      console.log(response);
+      this.alimentosData = response['alimentos'];
+    })
+  }
   
   setDadosData(){
     this.formDieta.controls.nome.setValue(this.data.nome);
@@ -77,6 +92,10 @@ export class DietaEditPage implements OnInit {
     this.apiService.updateItem(this.id, this.data).subscribe(response => {
       this.router.navigate(['dieta-listar']);
     })
+  }
+
+  delete(item) {
+    
   }
 
 }
