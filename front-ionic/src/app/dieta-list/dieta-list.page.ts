@@ -4,7 +4,7 @@ import { ApiDietasService } from '../../services/api-dietas.service';
 import { ApiAlimentosService } from 'src/services/api-alimentos.service';
 import { ApiUserLoginsService } from '../../services/api-user-login.service';
 import { Router } from '@angular/router';
-
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -17,10 +17,13 @@ export class DietaListPage implements OnInit {
   dietasData: any;
   dataAlimentos: any;
   userId: any;
+  loading:any;
+  id_tipo_user:any;
 
   constructor(
     public apiService: ApiDietasService,    
     public apiUserService: ApiUserLoginsService,
+    private loadingCtrl: LoadingController, 
     public router: Router,
     
 
@@ -29,8 +32,9 @@ export class DietaListPage implements OnInit {
   }
 
   ngOnInit() {
-  
+    
     this.userId  = localStorage.getItem('user_id');
+     
   }
 
 
@@ -49,24 +53,30 @@ export class DietaListPage implements OnInit {
   ionViewWillEnter() {
     // Used ionViewWillEnter as ngOnInit is not 
     // called due to view persistence in Ionic
-    this.getAllDietas();
+    this.showLoading();
+    this.getUser();
   }
 
   
   getAllDietas() {
-    
-
-    
+     
     let user_id  = localStorage.getItem('user_id');
-    //this.apiService.getListByUserId(user_id).subscribe(response => {
-      this.apiService.getList().subscribe(response => {
+    this.apiService.getListByUserId(user_id).subscribe(response => {
+    //  this.apiService.getList().subscribe(response => {
       debugger
       console.log(response);
       this.dietasData = [];
       this.dietasData = response['dietas'];
+      this.loading.dismiss();
+
     })
   }
  
+
+  getUser(){
+    this.id_tipo_user = localStorage.getItem('id_tipo_user');
+    this.getAllDietas();
+  }
 
   delete(item) {
     //Delete item in Dieta data
@@ -76,4 +86,11 @@ export class DietaListPage implements OnInit {
     });
   }
 
+  async showLoading() {
+    this.loading = await this.loadingCtrl.create({
+     message: 'Loading...',
+     spinner: 'circles',
+   });
+   this.loading.present();
+ }
 }

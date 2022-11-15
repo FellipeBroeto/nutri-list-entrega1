@@ -127,6 +127,13 @@ export class UserLoginCreatePage implements OnInit {
     this.data.password = this.formCadastro.controls.password.value;
     this.data.password_confirmation = this.formCadastro.controls.confirm_password.value;
     
+    if(this.data.password != this.data.password_confirmation){
+       //limpar msgs
+       this.errMsg = "As senhas devem ser iguais.";
+       this.showErrMsg = true;
+       return;
+    }
+    
     this.showLoading();
     this.apiService.register(this.data).subscribe((response) => {
       debugger;
@@ -143,13 +150,15 @@ export class UserLoginCreatePage implements OnInit {
 
       //set  localstorage vars
       localStorage.setItem('data_token', response['access_token']);
-      localStorage.setItem('user', response['user']);   
+      localStorage.setItem('id_tipo_user', response['user'].id_tipo_user);
+      localStorage.setItem('user_id', response['user'].id);
+   
         
       //rotear
       this.router.navigate(['dieta-listar']);
       
     }, error => {
-      this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
+      this.errMsg =`${JSON.stringify(error.msg)}`
       this.showErrMsg = true;
 
          //esconder loading
@@ -170,8 +179,7 @@ export class UserLoginCreatePage implements OnInit {
     }else{
       //nutricionista = tipo_usuario = 1
       this.showPac = true;
-      this.data.id_tipo_user = 1;
-      
+      this.data.id_tipo_user = 1; 
       
     }
   }

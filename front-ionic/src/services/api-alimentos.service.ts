@@ -70,6 +70,19 @@ export class ApiAlimentosService {
 
   }
 
+  // Get alimentos data by id dieta
+  getListByIdDieta(id_dieta): Observable<Alimento> {
+    
+      
+    return this.http
+    .get<Alimento>(this.base_path+'/dieta/listar/'+id_dieta, this.getHttpOptions())
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+    )
+
+  }
+
   // Update item by id
   updateItem(id, item): Observable<Alimento> {
     return this.http

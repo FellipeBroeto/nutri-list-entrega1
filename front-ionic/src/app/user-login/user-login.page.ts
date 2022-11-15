@@ -74,6 +74,8 @@ export class UserLoginPage implements OnInit {
         this.data = new UserLogin();
         localStorage.setItem('data_token', response['access_token']);
         localStorage.setItem('user_id', response['user'].id);
+        localStorage.setItem('id_tipo_user', response['user'].id_tipo_user);
+    
         this.showErrMsg = false;
         this.errMsg = "";
         this.loading.dismiss();
@@ -81,7 +83,7 @@ export class UserLoginPage implements OnInit {
       
         this.router.navigate(['dieta-listar']);
       }, error => {
-        this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
+        this.errMsg =`${JSON.stringify(error.msg)}`
         this.showErrMsg = true;
 
         //present toast

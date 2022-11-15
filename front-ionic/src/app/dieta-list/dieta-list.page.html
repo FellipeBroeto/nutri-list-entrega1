@@ -6,7 +6,10 @@
 
 
 <ion-content class="ion-padding">
-  <table class="table">
+  <div *ngIf="dietasData.length==0 "  >
+    <p>Nao existem dados.</p>
+  </div>
+  <table *ngIf="dietasData.length>0 " class="table">
     <thead>
       <tr>
         <th scope="col">Id&nbsp;</th>
@@ -26,7 +29,8 @@
         <td>{{ item.data }}</td>
         <td>{{ item.hora }}</td>
         <td style="display: flex">
-          <ion-button  color="primary" size="small" routerLink='/dieta-editar/{{item.id}}'>
+        
+          <ion-button *ngIf="id_tipo_user==1" color="primary" size="small" routerLink='/dieta-editar/{{item.id}}'>
             <ion-icon name="create-outline" ></ion-icon>           
           </ion-button>
           <!--ion-button color="danger" size="small" (click)="delete(item)">
@@ -36,7 +40,7 @@
             <ion-icon name="eye"></ion-icon>
            </ion-button> 
 
-           <ion-button color="primary" size="small" routerLink='/dieta-enviar/{{item.id}}'>            
+           <ion-button *ngIf="id_tipo_user==1" color="primary" size="small" routerLink='/dieta-enviar/{{item.id}}'>            
             <ion-icon name="open-outline"></ion-icon>
            </ion-button> 
           
@@ -47,16 +51,16 @@
   </table> 
   <ion-item>
 
-    <ion-button color="primary" size="small" [routerLink]="['/dieta-criar']">
+    <ion-button color="primary" *ngIf="id_tipo_user==1" size="small" [routerLink]="['/dieta-criar']">
       Adicionar Dieta
     </ion-button>
       &nbsp;
-    <ion-button color="primary" size="small" [routerLink]="['/alimento-listar']">
+    <ion-button color="primary" *ngIf="id_tipo_user==1" size="small" [routerLink]="['/alimento-listar']">
       Listar Alimentos
     </ion-button>
 
   </ion-item>
-  <ion-button [routerLink]="[ '/alimento-listar']" color="primary" size="small">
+  <ion-button *ngIf="id_tipo_user==1" [routerLink]="[ '/alimento-listar']" color="primary" size="small">
     Voltar
   </ion-button> 
   &nbsp;

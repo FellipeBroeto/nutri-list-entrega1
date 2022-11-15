@@ -17,9 +17,29 @@
     </ion-item> 
 
 
-      <ion-item>
+    <ion-item>
       <ion-label>email:</ion-label>
         <ion-input [readonly]="true"   value="{{data['email']}}">       
+      </ion-input>       
+    </ion-item> 
+
+
+    <ion-item>
+      <ion-label>Criacao:</ion-label>
+        <ion-input [readonly]="true"   value="{{data['created_at']}}">       
+      </ion-input>       
+    </ion-item> 
+
+
+    <ion-item *ngIf="data['id_tipo_user']==1">
+      <ion-label>Tipo User:</ion-label>
+        <ion-input [readonly]="true"  value="Nutricionista">       
+      </ion-input>       
+    </ion-item> 
+
+    <ion-item *ngIf="data['id_tipo_user']==2">
+      <ion-label>Tipo User:</ion-label>
+        <ion-input [readonly]="true"  value="Paciente">       
       </ion-input>       
     </ion-item> 
 

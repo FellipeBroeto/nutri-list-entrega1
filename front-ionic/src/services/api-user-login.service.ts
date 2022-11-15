@@ -120,6 +120,17 @@ export class ApiUserLoginsService {
 
   }
 
+  
+  getListPaciente(): Observable<Users> { 
+      return this.http
+    .get<Users>(this.base_path+"/paciente/listar", this.getHttpOptions())
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+    )
+
+  }
+
   updateItem(id, item): Observable<UserLogin> {
     return this.http
       .put<UserLogin>(this.base_path + '/' + id, JSON.stringify(item), this.getHttpOptions())

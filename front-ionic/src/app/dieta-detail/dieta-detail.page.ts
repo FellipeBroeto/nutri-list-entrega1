@@ -52,7 +52,7 @@ export class DietaDetailPage implements OnInit {
       this.formDieta.controls.hora.setValue(this.data.hora);
     });
     debugger
-    this.getAllAlimentos();
+    this.getAllAlimentosByIdDieta(this.id);
   }
 
   update() {
@@ -67,14 +67,12 @@ export class DietaDetailPage implements OnInit {
 
  
 
-  getAllAlimentos() {
+  getAllAlimentosByIdDieta(id_dieta) {
     
-    this.apiServiceAlimentos.getList().subscribe(response => {
-
-      
-      
-      console.log(response);
-      this.alimentosData = response['alimentos'];
-    })
+      this.apiServiceAlimentos.getListByIdDieta(id_dieta).subscribe(response => {
+        debugger
+        console.log(response);
+        this.alimentosData = response['alimentos'];
+      })
+    }
   }
-}

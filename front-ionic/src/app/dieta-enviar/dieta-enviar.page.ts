@@ -66,7 +66,7 @@ export class DietaEnviarPage implements OnInit {
     //get item enviars using id
     this.apiService.getItem(this.idDieta).subscribe(response => {
        //carregar combo usuarios
-        this.apiUserService.getList().subscribe(response => {
+        this.apiUserService.getListPaciente().subscribe(response => {
           this.dataUsers = response['users'];
         }); 
 

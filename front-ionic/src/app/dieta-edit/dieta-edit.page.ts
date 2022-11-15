@@ -41,7 +41,7 @@ export class DietaEditPage implements OnInit {
       'data': [null, [Validators.required]],
       'hora': [null, [Validators.required]],
     });
-    this.formDieta.controls.nome.setValue("teste ");
+    
     this.id = this.activatedRoute.snapshot.params["id"];
     //get item details using id
     this.apiService.getItem(this.id).subscribe(response => {
@@ -50,21 +50,10 @@ export class DietaEditPage implements OnInit {
       this.setDadosData();
       
     });
-    this.getAllAlimentos();
+    this.getAllAlimentosByIdDieta(this.id);
   }
 
-
-  getAllAlimentos() {
-    
-    this.apiServiceAlimentos.getList().subscribe(response => {
-
-      
-      
-      console.log(response);
-      this.alimentosData = response['alimentos'];
-    })
-  }
-  
+ 
   setDadosData(){
     this.formDieta.controls.nome.setValue(this.data.nome);
     this.formDieta.controls.periodo.setValue(this.data.periodo);
@@ -82,12 +71,11 @@ export class DietaEditPage implements OnInit {
     this.data.data =  this.formDieta.controls.data.value;
     this.data.hora =  this.formDieta.controls.hora.value;
     this.data.user_id =  user_id;
-   
+    this.data.lista_alimentos = this.alimentosData;
 
   } 
 
   update() {
-
     this.getDadosForm();
     this.apiService.updateItem(this.id, this.data).subscribe(response => {
       this.router.navigate(['dieta-listar']);
@@ -95,7 +83,16 @@ export class DietaEditPage implements OnInit {
   }
 
   delete(item) {
+    console.log("del_item: "+item);
+  }
+  
+  getAllAlimentosByIdDieta(id_dieta) {
     
+      this.apiServiceAlimentos.getListByIdDieta(id_dieta).subscribe(response => {
+        debugger
+        console.log(response);
+        this.alimentosData = response['alimentos'];
+      });    
   }
 
 }

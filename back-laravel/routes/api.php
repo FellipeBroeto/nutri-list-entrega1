@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     #usuarios
     Route::get('/usuario/listar', [DietaUserController::class, 'listarUsers']);
+    Route::get('/paciente/listar', [DietaUserController::class, 'listarPacienteUsers']);
 
     #alimentos
     Route::get('/dietas/listar/alimentos/{id}', [DietaController::class, 'listarDietaByIdUser']);
@@ -48,6 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/alimentos', [AlimentoController::class, 'adicionar']);
     Route::post('/alimentos/{id}', [AlimentoController::class, 'alterar']);
 
+    #listarAlimentosByIdDieta
+    Route::get('/alimentos/dieta/listar/{id}', [DietaController::class, 'listarAlimentosByIdDieta']);
 
     #dietas
     Route::get('/dietas/listar/user/{id}', [DietaController::class, 'listarDietaByIdUser']);

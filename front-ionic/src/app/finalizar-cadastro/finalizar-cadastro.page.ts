@@ -96,7 +96,7 @@ export class FinalizarCadastroPage implements OnInit {
 
         this.router.navigate(['dieta-listar']);
     }, error => {
-      this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
+      this.errMsg =`${JSON.stringify(error.msg)}`
       this.showErrMsg = true;
 
       //esconder loading
@@ -122,7 +122,7 @@ export class FinalizarCadastroPage implements OnInit {
        this.limparForm();
 
     }, error => {
-      this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
+      this.errMsg =`${JSON.stringify(error.msg)}`
       this.showErrMsg = true;
 
       //esconder loading

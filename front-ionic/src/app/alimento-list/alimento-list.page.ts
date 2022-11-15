@@ -28,8 +28,7 @@ export class AlimentoListPage implements OnInit {
   getAllAlimentos() {
     
     this.apiService.getList().subscribe(response => {
-
-      
+ 
       
       console.log(response);
       this.alimentosData = response['alimentos'];

@@ -65,7 +65,8 @@ export class AlimentoCreatePage implements OnInit {
       this.router.navigate(['alimento-listar']);
 
     }, error => {
-      this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
+      //this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
+      this.errMsg = error.msg;
       this.showErrMsg = true;
 
       //esconder loading

@@ -22,6 +22,17 @@ class DietaUserController extends Controller
 
     }
 
+    function listarPacienteUsers(Request $request){
+
+        $users = User::where('users.id_tipo_user', '=', '2')
+          ->get();
+
+        return  response()->json(array(
+            'users'=> $users
+        ), 200);
+
+    }
+
     function listar(Request $request){
 
         $dietauser = DietaUser::all();

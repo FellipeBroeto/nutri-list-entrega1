@@ -72,6 +72,10 @@ export class DietaCreatePage implements OnInit {
   addAlimentoDieta(item) {
 
     debugger;
+    //limpar msgs
+    this.errMsg = "";
+    this.showErrMsg = false;
+    
     let aux =  this.dataAlimentos.filter(alimento => alimento.id === parseInt(item.detail.value));
     this.totalCalorias += aux[0].calorias;
     this.dataAlimentosDieta.push(aux[0])
@@ -96,13 +100,20 @@ export class DietaCreatePage implements OnInit {
   }
 
   submitForm() {
-
+ 
 
     if(this.formDieta.controls.data.errors || 
       this.formDieta.controls.hora.errors || 
       this.formDieta.controls.nome.errors ||
       this.formDieta.controls.periodo.errors){
         return;
+    }
+ 
+    if(this.dataAlimentosDieta.length==0){
+      //limpar msgs
+      this.errMsg = "A dieta deve conter ao menos 1 alimento.";
+      this.showErrMsg = true;
+      return;
     }
 
 
@@ -135,7 +146,7 @@ export class DietaCreatePage implements OnInit {
 
 
     }, error => {
-      this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
+      this.errMsg =`${JSON.stringify(error.msg)}`
       this.showErrMsg = true;
 
       //esconder loading
