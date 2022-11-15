@@ -79,11 +79,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/PacienteNutricionista', [PacienteNutricionistaController::class, 'adicionar']);
     Route::post('/PacienteNutricionista/{id}', [PacienteNutricionistaController::class, 'alterar']);
 
-
+    ##associar/desassociar dieta
     Route::post('/associar-dieta-usuario/{id_dieta}/{id_usuario}', [DietaController::class, 'associarDietaUsuario']);
     Route::post('/desassociar-dieta-usuario/{id_dieta}/{id_usuario}', [DietaController::class, 'desassociarDietaUsuario']);
-    Route::post('/associar-alimento-dieta/{id_alimento}/{id_dieta}', [DietaController::class, 'associarAlimentoDieta']);
-    Route::post('/desassociar-alimento-dieta/{id_alimento}/{id_dieta}', [DietaController::class, 'desassociarAlimentoDieta']);
 
 
 });

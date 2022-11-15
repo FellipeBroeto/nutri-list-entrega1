@@ -38,8 +38,16 @@ export class DietaListPage implements OnInit {
   }
 
 
-  detalharUsuario() {
+  desassociar(dieta_id) {
+
+    this.showLoading();
     
+    this.apiService.desassociarDietaUsuario(dieta_id, this.userId ).subscribe(response => {      
+      
+      this.loading.dismiss();
+      this.ionViewWillEnter();
+
+    });
   }
 
   logout() {

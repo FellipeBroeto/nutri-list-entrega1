@@ -29,19 +29,25 @@
         <td>{{ item.data }}</td>
         <td>{{ item.hora }}</td>
         <td style="display: flex">
-        
+         
           <ion-button *ngIf="id_tipo_user==1" color="primary" size="small" routerLink='/dieta-editar/{{item.id}}'>
-            <ion-icon name="create-outline" ></ion-icon>           
+            <ion-icon name="create-outline" ></ion-icon>       
+             Editar
           </ion-button>
-          <!--ion-button color="danger" size="small" (click)="delete(item)">
+
+          <ion-button *ngIf="id_tipo_user==2" color="danger" size="small" (click)="desassociar(item.id)">
             <ion-icon name="trash"></ion-icon>
-          </!--ion-button-->
+            Excluir
+          </ion-button>
+
           <ion-button color="primary" size="small" routerLink='/dieta-detalhar/{{item.id}}'>
             <ion-icon name="eye"></ion-icon>
+            Ver
            </ion-button> 
 
            <ion-button *ngIf="id_tipo_user==1" color="primary" size="small" routerLink='/dieta-enviar/{{item.id}}'>            
             <ion-icon name="open-outline"></ion-icon>
+            Enviar
            </ion-button> 
           
 

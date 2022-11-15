@@ -21,6 +21,7 @@ export class DietaDetailPage implements OnInit {
   public showErrMsg:boolean = false;
   public errMsg:string = "";
   loading:any;
+  totalCalorias:number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,16 +64,22 @@ export class DietaDetailPage implements OnInit {
       this.router.navigate(['dieta-listar']);
     })
   }
-  
-
- 
-
-  getAllAlimentosByIdDieta(id_dieta) {
     
-      this.apiServiceAlimentos.getListByIdDieta(id_dieta).subscribe(response => {
-        debugger
-        console.log(response);
-        this.alimentosData = response['alimentos'];
-      })
+  getAllAlimentosByIdDieta(id_dieta) {
+  
+    this.apiServiceAlimentos.getListByIdDieta(id_dieta).subscribe(response => {
+      console.log(response);
+      this.alimentosData = response['alimentos'];
+      this.getTotalCalorias();      
+    });
+  }
+
+  getTotalCalorias(){
+    debugger
+    for(let i = 0; i< this.alimentosData.length; i++){
+      this.totalCalorias += this.alimentosData[i]["calorias"];
     }
   }
+
+
+}

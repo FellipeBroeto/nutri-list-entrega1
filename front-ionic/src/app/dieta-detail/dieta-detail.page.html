@@ -7,7 +7,7 @@
 
 <ion-content class="ion-padding">
 
-  <ion-title><b>Dados Dieta - Total Calorias 0 kcal</b></ion-title>
+  <ion-title><b>Dados Dieta - Total Calorias {{totalCalorias}} kcal</b></ion-title>
 
   <form  [formGroup]="formDieta">
 
@@ -62,7 +62,7 @@
       
       <tbody>
         <tr *ngFor="let item of alimentosData">
-          <td>{{ item.id }}</td>
+           <td>{{ item.id }}</td>
           <td>{{ item.nome }}</td>
           <td>{{ item.calorias }}</td>
           <td>{{ item.peso }}</td>

@@ -219,6 +219,9 @@ class DietaController extends Controller
         }
 
 
+        //deletando relacionamento de alimentos/dietas
+        $deletarDietaAlimentos = DietaAlimento::where('dieta_id', $request->id)->delete();
+        Log::info("lista_alimentos-deletarDietaAlimentos: ". $deletarDietaAlimentos);
 
         $dieta=Dieta::find($request->id);
         $dieta->nome=$request->nome;
@@ -226,6 +229,30 @@ class DietaController extends Controller
         $dieta->data=$request->data;
         $dieta->hora=$request->hora;
         $result=$dieta->save();
+
+        Log::info("lista_alimentos-init");
+        $lista=$request ->lista_alimentos;
+        Log::info("lista_alimentos-size:".count($lista));
+
+        for($i=0; $i< count($lista);$i++){
+
+            $alimento_id=$lista[$i]['id'];
+
+            Log::info("lista_alimentos-1");
+            $dietaAlimentos=new DietaAlimento;
+            Log::info("lista_alimentos-2");
+            $dietaAlimentos->dieta_id=$result1->id;
+            Log::info("lista_alimentos-3:".$dietaAlimentos->dieta_id);
+            $dietaAlimentos->alimento_id = $alimento_id;
+            Log::info("lista_alimentos-4:".$dietaAlimentos->alimento_id);
+            $resultDietaAlim=$dietaAlimentos->Save();
+            Log::info("lista_alimentos-5");
+
+            Log::info("lista_alimentos-id:".$lista[$i]['id']);
+            Log::info("dieta-id:".$result1->id);
+
+        }
+
 
         if($result){
             return  response()->json(array(
@@ -245,7 +272,6 @@ class DietaController extends Controller
 
         $id_dieta =($request->id_dieta);
         $id_usuario =($request->id_usuario);
-
 
         $dietauser=new DietaUser;
         $dietauser->dieta_id=$id_dieta;
@@ -273,37 +299,25 @@ class DietaController extends Controller
         $id_dieta =($request->id_dieta);
         $id_usuario =($request->id_usuario);
 
-        return response()->json([
-            'message'=>'sucesso!'
-        ], 200);
+        $deletarDietaUsuario = DietaUser::where([
+            ['user_id', $id_usuario],
+            ['dieta_id', $id_dieta],
+        ])->delete();
 
 
+        if($deletarDietaUsuario){
+            return  response()->json(array(
+                'message'=>'Realizado com sucesso!'
+            ), 200);
 
-    }
-    function associarAlimentoDieta(Request $request){
-
-
-        $id_dieta =($request->id_dieta);
-        $id_alimento =($request->id_alimento);
-
-        return response()->json([
-            'message'=>'sucesso!'
-        ], 200);
-
-
-    }
-
-    function desassociarAlimentoDieta(Request $request){
-
-
-        $id_dieta =($request->id_dieta);
-        $id_alimento =($request->id_alimento);
-
-        return response()->json([
-            'message'=>'sucesso!'
-        ], 200);
+        }else{
+            return response()->json([
+                'erro'=>'Erro ao salvar!'
+            ], 400);
+        }
 
 
     }
+
 }
 
