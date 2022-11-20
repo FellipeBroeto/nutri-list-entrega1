@@ -64,7 +64,7 @@ export class AlimentoEditPage implements OnInit {
 
   update() {
 
-    debugger;
+    
   
     this.getDadosForm();
     this.apiService.updateItem(this.id, this.data).subscribe(response => {

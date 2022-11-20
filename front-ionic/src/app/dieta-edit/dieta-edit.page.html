@@ -53,23 +53,7 @@
     <div *ngIf="formDieta.controls.hora.errors" class="px-3 text-danger">
       <p style="color:red"><small>Campo obrigatório</small></p>
     </div>
-  
-
-    <ion-item>
-      <ion-button (click)="update()" color="success" size="small">
-        Alterar
-      </ion-button>
-      <ion-button [routerLink]="[ '/dieta-listar']" color="danger" size="small">
-        Cancelar
-      </ion-button>
-      &nbsp;
-      
-    </ion-item>
-
-    <div *ngIf="showErrMsg" class="px-3 text-danger">
-      <p style="color:red"><small>{{errMsg}}</small></p>
-    </div>
-    
+   
   <br/>
   <br/>
 
@@ -96,7 +80,7 @@
           <!--ion-button color="primary" size="small" routerLink='/alimento-editar/{{item.id}}'>
             <ion-icon name="create-outline"></ion-icon>
           </!--ion-button-->
-          <ion-button color="danger" size="small" (click)="delete(item)">
+          <ion-button color="danger" size="small" (click)="deleteItemDieta(item)">
             <ion-icon name="trash"></ion-icon>
           </ion-button>
           <!--ion-button color="primary" size="small" routerLink='/alimento-detalhar/{{item.id}}'>
@@ -110,5 +94,84 @@
   </table>
 </form>
 
+<br>
+<ion-title>
+  <b>Adicionar Alimentos</b> 
+</ion-title>
+
+  <ion-list>
+    <ion-label>Alimentos</ion-label>
+    <ion-item>
+      <ion-select placeholder="Selecione" (ionChange)="addAlimentoDieta($event)" >
+        <ion-select-option value="" >Selecione</ion-select-option>
+        <ng-container *ngFor="let item of dataAlimentos">              
+          <ion-select-option value="{{item.id}}">{{item.nome}}</ion-select-option>                           
+        </ng-container>    
+            
+      </ion-select>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+    </ion-item>
+  </ion-list> 
+
+  <ion-item>
+    <table class="table" *ngIf="dataAlimentosDieta.length>0 ">
+      <thead>
+        <tr>
+          <!--th scope="col" st>&nbsp;Id&nbsp;</!--th-->
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey;"> &nbsp;Nome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey;">&nbsp;calorias&nbsp;</th>
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey;">&nbsp;peso&nbsp;</th>
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey;">&nbsp;porcao&nbsp;</th>
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey;">&nbsp; </th>
+        </tr>
+  
+      </thead>
+      
+      <tbody>
+        <tr *ngFor="let item of dataAlimentosDieta">
+          <!--td>{{ item.id_local }}</!--td-->
+          <td>{{ item.nome }}</td>
+          <td>{{ item.calorias }}</td>
+          <td>{{ item.peso }}</td>
+          <td>{{ item.porcao }}</td>
+          <td style="display: flex">
+             
+            <ion-button color="danger" size="small" (click)="deleteItemDieta(item)" *ngIf="dataAlimentosDieta.length>0">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button> 
+  
+          </td>
+        </tr>
+
+        <tr>
+          <td> </td>
+          <td> <b>Total calorias:</b></td>
+          <td> {{totalCalorias}} kcal</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </ion-item>
+
+  <br>
+  <br>
+  <ion-item>
+    <ion-button (click)="update()" color="success" size="small">
+      Alterar
+    </ion-button>
+    <ion-button [routerLink]="[ '/dieta-listar']" color="danger" size="small">
+      Cancelar
+    </ion-button>
+    &nbsp;
+    
+  </ion-item>
+
+  <div *ngIf="showErrMsg" class="px-3 text-danger">
+    <p style="color:red"><small>{{errMsg}}</small></p>
+  </div>
+  
   
 </ion-content>

@@ -41,7 +41,7 @@ export class AlimentoDetailPage implements OnInit {
     this.id = this.activatedRoute.snapshot.params["id"];
     //get item details using id
     this.apiService.getItem(this.id).subscribe(response => {
-      debugger
+      
       console.log(response['alimentos']);
       this.data = response['alimentos'];
       this.formAlimento.controls.nome.setValue(this.data.nome);
@@ -53,7 +53,7 @@ export class AlimentoDetailPage implements OnInit {
 
   update() {
 
-    debugger;
+    
     //Update item by taking id and updated data object
     this.apiService.updateItem(this.id, this.data).subscribe(response => {
       this.router.navigate(['alimento-listar']);

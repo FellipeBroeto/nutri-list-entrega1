@@ -5,6 +5,7 @@ import { Dieta } from '../models/dieta';
 import { ApiDietasService } from '../../services/api-dietas.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiAlimentosService } from './../../services/api-alimentos.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-dieta-detail',
@@ -24,6 +25,7 @@ export class DietaDetailPage implements OnInit {
   totalCalorias:number = 0;
 
   constructor(
+    private loadingCtrl: LoadingController, 
     private formBuilder: FormBuilder,
     public activatedRoute: ActivatedRoute,
     public router: Router,
@@ -35,6 +37,8 @@ export class DietaDetailPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.showLoading();
     
     this.formDieta = this.formBuilder.group({
       'nome': [null, [Validators.required]],
@@ -51,14 +55,14 @@ export class DietaDetailPage implements OnInit {
       this.formDieta.controls.periodo.setValue(this.data.periodo);
       this.formDieta.controls.data.setValue(this.data.data);
       this.formDieta.controls.hora.setValue(this.data.hora);
+      this.getAllAlimentosByIdDieta(this.id);
     });
     debugger
-    this.getAllAlimentosByIdDieta(this.id);
   }
 
   update() {
 
-    debugger;
+    
     //Update item by taking id and updated data object
     this.apiService.updateItem(this.id, this.data).subscribe(response => {
       this.router.navigate(['dieta-listar']);
@@ -71,6 +75,7 @@ export class DietaDetailPage implements OnInit {
       console.log(response);
       this.alimentosData = response['alimentos'];
       this.getTotalCalorias();      
+
     });
   }
 
@@ -79,7 +84,19 @@ export class DietaDetailPage implements OnInit {
     for(let i = 0; i< this.alimentosData.length; i++){
       this.totalCalorias += this.alimentosData[i]["calorias"];
     }
+
+    //esconder loading
+    this.loading.dismiss(); 
   }
+
+  
+  async showLoading() {
+    this.loading = await this.loadingCtrl.create({
+     message: 'Loading...',
+     spinner: 'circles',
+   });
+   this.loading.present();
+ }
 
 
 }

@@ -61,13 +61,13 @@ export class UserLoginPage implements OnInit {
 
     if(!this.formLogin.controls.email.errors){
 
-      debugger;
+      
       this.data.email = this.formLogin.controls.email.value;
       this.data.password = this.formLogin.controls.password.value;
 
       this.showLoading();
       this.apiService.login(this.data).subscribe((response) => {
-        debugger;
+        
 
         this.limparForm();
 
@@ -83,11 +83,11 @@ export class UserLoginPage implements OnInit {
       
         this.router.navigate(['dieta-listar']);
       }, error => {
-        this.errMsg =`${JSON.stringify(error.msg)}`
+        this.errMsg =`${JSON.stringify(error.msg.message)}`
         this.showErrMsg = true;
 
         //present toast
-        this.presentToast(JSON.stringify(error.msg))
+        this.presentToast(JSON.stringify(error.msg.message).replace("\"","").replace("\"",""));
 
         //esconder loading
         this.loading.dismiss();

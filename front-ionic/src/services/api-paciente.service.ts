@@ -41,7 +41,7 @@ export class ApiPacienteService {
     let httpOptions =  this.getHttpOptions();
      
 
-    debugger;
+    
 
     return this.http      
       .post<Paciente>(this.base_path, JSON.stringify(item), this.getHttpOptions())

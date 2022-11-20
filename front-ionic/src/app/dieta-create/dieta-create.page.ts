@@ -23,6 +23,7 @@ export class DietaCreatePage implements OnInit {
   public errMsg:string = "";
   loading:any;
   totalCalorias:number;
+  contadorAlimentoDieta:number;
 
   constructor(
     public apiAlimentosService: ApiAlimentosService,
@@ -35,6 +36,7 @@ export class DietaCreatePage implements OnInit {
   ngOnInit() {
     this.totalCalorias = 0;
     this.dataAlimentosDieta = [];
+    this.contadorAlimentoDieta = 0; 
 
     this.formDieta = this.formBuilder.group({
       'nome': [null, [Validators.required]],
@@ -57,28 +59,36 @@ export class DietaCreatePage implements OnInit {
 
   
   deleteItemDieta(item) {
-    debugger;
-
+    
     this.totalCalorias -= (item.calorias);
+    this.dataAlimentosDieta = this.dataAlimentosDieta.filter((item_filtro) => item_filtro.id_local !== item.id_local);
 
-     for(let i=0; i < this.dataAlimentosDieta.length; i++){
-        if(this.dataAlimentosDieta[i].id==item.id){
-          this.dataAlimentosDieta.splice(i);
-        }
-     }    
-     debugger;
   }
 
   addAlimentoDieta(item) {
 
-    debugger;
+    
     //limpar msgs
     this.errMsg = "";
     this.showErrMsg = false;
-    
+ 
+
     let aux =  this.dataAlimentos.filter(alimento => alimento.id === parseInt(item.detail.value));
+    
     this.totalCalorias += aux[0].calorias;
-    this.dataAlimentosDieta.push(aux[0])
+    let obj = {
+      "calorias"  :  aux[0].calorias,
+      "created_at"  :  aux[0].created_at,
+      "id"  :  aux[0].id,
+      "id_local"  : this.contadorAlimentoDieta,
+      "nome"  :  aux[0].nome,
+      "peso"  :  aux[0].peso,
+      "porcao"  :  aux[0].porcao,
+      "updated_at"  :  aux[0].updated_at
+    };
+ 
+    this.dataAlimentosDieta.push(obj);
+    this.contadorAlimentoDieta++;
 
   }
     
@@ -115,10 +125,7 @@ export class DietaCreatePage implements OnInit {
       this.showErrMsg = true;
       return;
     }
-
-
-    debugger;
-
+ 
     this.data.data = this.formDieta.controls.data.value.substring(0,10);
     this.data.hora = this.formDieta.controls.hora.value.substring(0,10)+" "+this.formDieta.controls.hora.value.substring(11,16);
     this.data.nome = this.formDieta.controls.nome.value;
@@ -129,11 +136,7 @@ export class DietaCreatePage implements OnInit {
     this.showLoading();
 
     this.apiService.createItem(this.data).subscribe((response) => { 
-
-       
-      this.router.navigate(['dieta-listar']);
-      
-      
+ 
       //limpar form
       this.limparForm();
 
@@ -144,9 +147,11 @@ export class DietaCreatePage implements OnInit {
       //esconder loading
       this.loading.dismiss();
 
+      this.router.navigate(['dieta-listar']);
+
 
     }, error => {
-      this.errMsg =`${JSON.stringify(error.msg)}`
+      this.errMsg =`${JSON.stringify(error.msg.message)}`
       this.showErrMsg = true;
 
       //esconder loading

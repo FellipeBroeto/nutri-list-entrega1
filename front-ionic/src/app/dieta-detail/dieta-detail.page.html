@@ -7,13 +7,13 @@
 
 <ion-content class="ion-padding">
 
-  <ion-title><b>Dados Dieta - Total Calorias {{totalCalorias}} kcal</b></ion-title>
+  <ion-title><b>Total Calorias <span style="color: red;font-size: xx-large;">{{totalCalorias}}</span> kcal</b></ion-title>
 
   <form  [formGroup]="formDieta">
 
     <ion-item>
       <ion-label>Nome:</ion-label>
-      <ion-input [readonly]="true"   value="{{data.nome}}">
+      <ion-input [readonly]="true"   value="{{data.nome}}"> 
        
        </ion-input>
     </ion-item> 
@@ -27,7 +27,7 @@
     
 
     <ion-item>
-      <ion-label>Data</ion-label>
+      <ion-label>Data:</ion-label>
       <ion-input [readonly]="true"   value="{{data.data}}">
        
       </ion-input>
@@ -36,7 +36,7 @@
     
 
     <ion-item>
-      <ion-label>Hora</ion-label>
+      <ion-label>Hora:</ion-label>
       <ion-input [readonly]="true"   value="{{data.hora}}">
        
       </ion-input>
@@ -44,29 +44,31 @@
     
     </ion-item>
     
-    <br>
-    <br>
-    <ion-title><b>Alimentos Dieta</b></ion-title>
-    <br>
+      <br>
+      <br>
+      <ion-title><b>Alimentos para consumo na Dieta</b></ion-title>
+      <br> 
+
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">&nbsp;Id&nbsp;</th>
-          <th scope="col">&nbsp;Nome&nbsp;</th>
-          <th scope="col">&nbsp;calorias&nbsp;</th>
-          <th scope="col">&nbsp;peso&nbsp;</th>
-          <th scope="col">&nbsp;porcao&nbsp;</th>
+          <!--th scope="col">&nbsp;Id&nbsp;</th-->
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey;">&nbsp;Nome&nbsp;</th>
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey">&nbsp;Calorias&nbsp;</th>
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey">&nbsp;Peso&nbsp;</th>
+          <th scope="col" style="width: 110px;text-align: center;background-color: darkgrey">&nbsp;Porção&nbsp;</th>
         </tr>
-  
+      
       </thead>
       
       <tbody>
+        <br>
         <tr *ngFor="let item of alimentosData">
-           <td>{{ item.id }}</td>
-          <td>{{ item.nome }}</td>
-          <td>{{ item.calorias }}</td>
-          <td>{{ item.peso }}</td>
-          <td>{{ item.porcao }}</td>
+           <!--td>{{ item.id }}</!--td-->
+          <td style="width: 110px;text-align: center;background-color: honeydew;">{{ item.nome }}</td>
+          <td style="width: 110px;text-align: center;background-color: honeydew;">{{ item.calorias }}</td>
+          <td style="width: 110px;text-align: center;background-color: honeydew;">{{ item.peso }}</td>
+          <td style="width: 110px;text-align: center;background-color: honeydew;">{{ item.porcao }}</td>
           <td style="display: flex">
             <!--ion-button color="primary" size="small" routerLink='/alimento-editar/{{item.id}}'>
               <ion-icon name="create-outline"></ion-icon>
@@ -77,16 +79,17 @@
             <!--ion-button color="primary" size="small" routerLink='/alimento-detalhar/{{item.id}}'>
               <ion-icon name="eye"></ion-icon>
              </!--ion-button-->
-            
-  
+        
           </td>
         </tr>
       </tbody>
     </table>
-
-    <br><br><br>
+    <br>
+    <ion-title><b>Total Calorias <span style="color: red;font-size: xx-large;">{{totalCalorias}}</span> kcal</b></ion-title>
+    <br><br>
+    
     <ion-item>
-      
+    
       <ion-button [routerLink]="[ '/dieta-listar']" color="primary" size="small">
         Voltar
       </ion-button>
@@ -97,6 +100,10 @@
    
 
 </form>
-
+<ion-footer>
+  <ion-toolbar center color="tertiary">
+    <ion-title>Nutrilist</ion-title>
+  </ion-toolbar>
+</ion-footer>
   
 </ion-content>

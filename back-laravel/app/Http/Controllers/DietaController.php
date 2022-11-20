@@ -228,10 +228,10 @@ class DietaController extends Controller
         $dieta->periodo=$request->periodo;
         $dieta->data=$request->data;
         $dieta->hora=$request->hora;
-        $result=$dieta->save();
+        $result1=$dieta->save();
 
         Log::info("lista_alimentos-init");
-        $lista=$request ->lista_alimentos;
+        $lista=$request->lista_alimentos;
         Log::info("lista_alimentos-size:".count($lista));
 
         for($i=0; $i< count($lista);$i++){
@@ -241,7 +241,7 @@ class DietaController extends Controller
             Log::info("lista_alimentos-1");
             $dietaAlimentos=new DietaAlimento;
             Log::info("lista_alimentos-2");
-            $dietaAlimentos->dieta_id=$result1->id;
+            $dietaAlimentos->dieta_id=$request->id;
             Log::info("lista_alimentos-3:".$dietaAlimentos->dieta_id);
             $dietaAlimentos->alimento_id = $alimento_id;
             Log::info("lista_alimentos-4:".$dietaAlimentos->alimento_id);
@@ -249,12 +249,12 @@ class DietaController extends Controller
             Log::info("lista_alimentos-5");
 
             Log::info("lista_alimentos-id:".$lista[$i]['id']);
-            Log::info("dieta-id:".$result1->id);
+            Log::info("dieta-id:".$request->id);
 
         }
 
 
-        if($result){
+        if($result1){
             return  response()->json(array(
                 'message'=>'salvo com sucesso!'
             ), 200);

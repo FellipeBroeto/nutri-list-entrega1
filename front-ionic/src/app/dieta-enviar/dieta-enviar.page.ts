@@ -43,7 +43,7 @@ export class DietaEnviarPage implements OnInit {
     this.idUsuario = this.formDieta.controls.paciente.value;
 
     this.apiService.associarDietaUsuario(this.idUsuario, this.idDieta).subscribe(response => {
-        debugger;
+        
         console.log("sucess");
         this.router.navigate(['dieta-listar']);
     }, error => {
@@ -76,7 +76,7 @@ export class DietaEnviarPage implements OnInit {
 /*
   update() {
 
-    debugger;
+    
     //Update item by taking id and updated data object
     this.apiService.updateItem(this.id, this.data).subscribe(response => {
       this.router.navigate(['dieta-listar']);

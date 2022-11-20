@@ -136,7 +136,7 @@ export class UserLoginCreatePage implements OnInit {
     
     this.showLoading();
     this.apiService.register(this.data).subscribe((response) => {
-      debugger;
+      
       //limpar e esconder msgs de erro
       this.errMsg = "";
       this.showErrMsg = false;
@@ -158,7 +158,7 @@ export class UserLoginCreatePage implements OnInit {
       this.router.navigate(['dieta-listar']);
       
     }, error => {
-      this.errMsg =`${JSON.stringify(error.msg)}`
+      this.errMsg =`${JSON.stringify(error.msg.message)}`
       this.showErrMsg = true;
 
          //esconder loading

@@ -45,7 +45,7 @@ export class UserDetailPage implements OnInit {
 
       this.apiService.getItem(this.id).subscribe(response => {
 
-        debugger;
+        
       
         this.data = response['user'];
         this.formUserDetail.controls.nome.setValue(this.data.nome);
@@ -56,7 +56,7 @@ export class UserDetailPage implements OnInit {
 
   update() {
 
-    debugger;
+    
     //Update item by taking id and updated data object
     this.apiService.updateItem(this.id, this.data).subscribe(response => {
       this.router.navigate(['dieta-listar']);

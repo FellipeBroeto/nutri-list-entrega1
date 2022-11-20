@@ -66,7 +66,7 @@ export class AlimentoCreatePage implements OnInit {
 
     }, error => {
       //this.errMsg =`${error.status}:${JSON.stringify(error.msg)}`
-      this.errMsg = error.msg;
+      this.errMsg = error.msg.message;
       this.showErrMsg = true;
 
       //esconder loading

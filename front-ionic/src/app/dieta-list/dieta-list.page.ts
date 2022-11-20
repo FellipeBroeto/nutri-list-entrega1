@@ -51,7 +51,7 @@ export class DietaListPage implements OnInit {
   }
 
   logout() {
-    debugger;
+    
     this.apiUserService.logout().subscribe(response => {      
       this.router.navigate(['']);
     })
